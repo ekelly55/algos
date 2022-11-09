@@ -1,18 +1,25 @@
-const stack = ["journal", "planner", "dune", ["golden compass", "amber spyglass", "subtle knife"]]
+class Stack {
 
-function addBook(book) {
-    stack.push(book)
-    return books
+    constructor() {
+        this.items=[]
+    }
+    push(item){
+        this.items.push(item)
+    }
+    pop(){
+        this.items.pop()
+    }
+    peek(){
+        this.items.peek()
+    }
+    isEmpty(){
+        return this.items.length === 0
+    }
+    
 }
 
-function removeBook(){
-    stack.pop()
-    return stack
-}
-
-function seeBook(){
-    stack.peek()
-}
+let books = new Stack()
 
 
-console.log(removeBook()
+console.log(books)
+//books = ["journal", "planner", "dune", ["golden compass", "amber spyglass", "subtle knife"]];
