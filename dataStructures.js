@@ -21,3 +21,22 @@ myArray = new Array(5)
 //linked list: next needs to be updated as you add items. there can only be one tail
 
 //doubly linked have a previous property also that points backwards. makes it easier to move through, but also more data and more complex if you're adding or removing values in the middle 
+
+//linked list is not usually used by itslef. normally the basis for stack or queue
+
+
+
+
+//map vs object
+/*
+// map is like object and is an instance of object but can use any data type for key. object can only use primitives for key. 
+
+// map preserves original order of key value pair, object doesn't. 
+map is an instance of object, but not vice versa
+
+can create new objects by literal or constructor (don't use constructor normally)
+map can only be created by constructor: receives an iterable, like an array, with key value pairs for each element
+*/
+
+const map = new Map([[1,2],[3,4]])
+console.log(map)
