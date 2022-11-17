@@ -24,7 +24,25 @@ myArray = new Array(5)
 
 //linked list is not usually used by itslef. normally the basis for stack or queue
 
+class LinkedList {
+    constructor(head=null){
+        this.head = head
+    }
+}
+class ListNode {
+    constructor(value) {
+        this.value=value,
+        this.next=null
+    }
+}
 
+let node1 = new ListNode(2)
+let node2= new ListNode(5)
+node1.next=node2
+
+let list = new LinkedList(node1)
+
+console.log(list.head.next.value)
 
 
 //map vs object
@@ -39,4 +57,4 @@ map can only be created by constructor: receives an iterable, like an array, wit
 */
 
 const map = new Map([[1,2],[3,4]])
-console.log(map)
+//console.log(map)
