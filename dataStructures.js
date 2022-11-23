@@ -42,7 +42,7 @@ node1.next=node2
 
 let list = new LinkedList(node1)
 
-console.log(list.head.next.value)
+// console.log(list.head.next.value)
 
 
 //map vs object
@@ -119,4 +119,60 @@ ht.add("Canada", "300")
 ht.add("Germany", "100")
 ht.add("Italy", "50")
 
-console.log(ht.search("Italy"))
+// console.log(ht.search("Italy"))
+
+// binary trees:
+
+class Node {
+    constructor(data){
+        this.data=data;
+        this.left=null;
+        this.right=null;
+    }
+}
+
+class BinaryTree {
+    constructor(){
+        this.root=null;
+    }
+    insert(data){
+        let newNode = new Node(data);
+        
+        if(this.root === null)
+            this.root = newNode;
+        else
+            this.insertNode(this.root, newNode);
+    }
+    insertNode(node, newNode){
+        if(newNode.data < node.data){
+            if(node.left===null)
+                node.left = newNode;
+            else
+                this.insertNode(node.left, newNode);
+        } else {
+            if(node.right === null)
+                node.right = newNode;
+            else
+                this.insertNode(node.right, newNode);
+        }
+    }
+}
+
+const tree = new BinaryTree()
+
+let root = tree.insert(5)
+tree.insert(6)
+tree.insert(2)
+tree.insert(35)
+tree.insert(673)
+tree.insert(34)
+tree.insert(0)
+tree.insert(1)
+tree.insert(3)
+tree.insert(5.5)
+tree.insert(-1)
+tree.insert(1)
+
+console.log(tree.root)
+
+
