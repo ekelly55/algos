@@ -58,3 +58,65 @@ map can only be created by constructor: receives an iterable, like an array, wit
 
 const map = new Map([[1,2],[3,4]])
 //console.log(map)
+
+// hash tables: collisions - can use open addressing (probing) or closed addressing (chaining)
+
+// probing can be linear, quadratic or double hashing
+
+//if you know the limits on type and number of keys, can optimize table size at start. can fill whole table and not waste memory. no addt'l data structures
+
+//but more complex comp, can fill table leaving no room for new data, address won't end up corresponding to it's hash
+
+//linear can cause clustering: values all close together. requries more iteration. 
+
+//quadratic: move exponential steps to right: 1, 4, 16...
+
+//double hashing: add a second hash function. if the space is occupied, run that hash value through a second function. if that's occupied, try 2x, 3x, etc. 
+
+//chaining: closed addressing. each slot on the table is a bucket. usually buckets are linked lists, which preserve the simplicity: LIFO or FIFO
+
+//chainging is more elegant. simpler insertion and deletion. can always add more data.
+
+//but does require more total memory and processing, may end up with unused slots, thus memory allocated, a bad hash function may create long chains
+
+//hash tables need 3 basic methods: search, insert, remove
+
+//hash tables are great when you have millions or billions of entries: thats why we haven't used them. used for real world db and computer memory. spell checker is an implementation of a hash table
+
+class HashTable {
+    constructor() {
+        this.values = {};
+        this.length = 0;
+        this.size = 0;
+    }
+    calculateHash(key){
+        return key.toString().length%this.size
+    }
+    
+    add(key, value){
+        const hash = this.calculateHash(key)
+        if(!this.values.hasOwnProperty(hash)){
+            this.values[hash]={};
+        }
+        if (!this.values[hash].hasOwnProperty(key)){
+            this.length++;
+        }
+        this.values[hash][key] = value;
+    }
+    search(key){
+        const hash = this.calculateHash(key);
+        if(this.values.hasOwnProperty(hash) && this.values[hash].hasOwnProperty(key)){
+            return this.values[hash][key];
+        } else {
+            return null;
+        }
+    }
+}
+
+const ht = new HashTable()
+
+ht.add("Canada", "300")
+ht.add("Germany", "100")
+ht.add("Italy", "50")
+
+console.log(ht.search("Italy"))

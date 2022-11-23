@@ -26,23 +26,25 @@ let comment5 = new Comment("5", 4)
 comments.push(comment5)
 let comment6 = new Comment("6")
 comments.push(comment6)
-let comment7 = new Comment("7")
-comments.push(comment6)
+let comment7 = new Comment("7", 1)
+comments.push(comment7)
 
 
 
 console.log(comments)
 
-let sum = 0
-let totalRatings = 0
+let sum = null
+let totalRatings = null
+
+comments.map((comment, i) => {
+    if(comment.rating){
+        sum+=comment.rating
+        totalRatings+=1
+        console.log([sum, totalRatings])
+    }    
+})
+
 let averageRating = sum/totalRatings
-
-const counts = comments.map((comment, i) => {
-        if(comment.rating){
-            sum+=comment.rating
-            totalRatings+=1
-        }    
-    })
-
-
 console.log(averageRating)
+let stars = "⭐"
+console.log(stars.repeat(Math.round(averageRating)))
