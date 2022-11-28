@@ -156,6 +156,38 @@ class BinaryTree {
                 this.insertNode(node.right, newNode);
         }
     }
+    //I don't get what this does. it seems to say redefine the root as the this root, which we are removing. does it remove just the data but keep the root? what if the data (key) is not in the root? will it recur? yes. if it's not there, it moves left or right down each path til it finds it, then redefines whatever nodes it has to, including the root. but why is it redfiding the root as the removed node?
+
+    remove(data){
+        this.root = this.removeNode(this.root, data);
+    }
+    
+    removeNode(node, key){
+        if(node === null)
+            return null;
+        else if(key<node.data){
+            node.left = this.removeNode(node.left, key);
+            return node;
+        } else if(key > node.data){
+            node.right = this.removeNode(node.right, key);
+            return node;
+        } else {
+            if(node.left === null && node.right === null){
+                node = null;
+                return node;
+            }
+            if(node.left === null){
+                node = node.right;
+                return node;
+            }
+            else if(node.right === null){
+                node = node.left;
+                return node;
+            }
+        }
+        let aux = ths.findMinNode(node.right);
+        node.data = aux.data;
+    }
 }
 
 const tree = new BinaryTree()
