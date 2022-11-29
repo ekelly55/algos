@@ -156,7 +156,7 @@ class BinaryTree {
                 this.insertNode(node.right, newNode);
         }
     }
-    //I don't get what this does. it seems to say redefine the root as the this root, which we are removing. does it remove just the data but keep the root? what if the data (key) is not in the root? will it recur? yes. if it's not there, it moves left or right down each path til it finds it, then redefines whatever nodes it has to, including the root. but why is it redfiding the root as the removed node?
+    //I don't get what this does. it seems to say redefine the root as the this root, which we are removing. does it remove just the data but keep the root? what if the data (key) is not in the root? will it recur? yes. if it's not there, it moves left or right down each path til it finds it, then redefines whatever nodes it has to, including the root. but why is it redfiding the root as the removed node? it doesn't. I'm assuming that as the function recurs down the different branches, this.root is changed to this.node
 
     remove(data){
         this.root = this.removeNode(this.root, data);
@@ -172,10 +172,12 @@ class BinaryTree {
             node.right = this.removeNode(node.right, key);
             return node;
         } else {
+            //remove node w/ no children
             if(node.left === null && node.right === null){
                 node = null;
                 return node;
             }
+            //remove node w/ one child
             if(node.left === null){
                 node = node.right;
                 return node;
@@ -185,8 +187,39 @@ class BinaryTree {
                 return node;
             }
         }
-        let aux = ths.findMinNode(node.right);
+        //remove node w/ two children
+        let aux = this.findMinNode(node.right);
         node.data = aux.data;
+    }
+    findMinNode(node){
+        //if there's no left node then it is the min
+        if(node.left === null)
+            return node;
+            //if there's a left node, then go down that and recur until there is none
+        else    
+            return this.findMinNode(node.left)
+    }
+    //traversal
+    inorder(node){
+        if(node !== null){
+            this.inorder(node.left);
+            console.log(node.data);
+            this.inorder(node.right);
+        }
+    }
+    preorder(node){
+        if(node !== null){
+            console.log(node.data);
+            this.preorder(node.left);
+            this.preorder(node.right);
+        }
+    }
+    postorder(node){
+        if(node !== null){
+            this.postorder(node.left);
+            this.postorder(node.right);
+            console.log(node.data);
+        }
     }
 }
 
@@ -205,6 +238,7 @@ tree.insert(5.5)
 tree.insert(-1)
 tree.insert(1)
 
-console.log(tree.root)
 
+tree.remove(35)
+console.log(tree.findMinNode(tree.root))
 
