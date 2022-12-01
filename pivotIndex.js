@@ -39,17 +39,43 @@
 
 function pivotIndex(nums){
     let lSum = 0
+    let lIndex = 0
     let rSum = 0
-    nums.forEach(num => {
-        const leftSum = (num) => {
-            lSum = nums[indexOf(num)-1]+ leftSum(nums[indexOf(num)-1])
+    let rIndex = 0
+    for(i=0; i<nums.length; i++) {
+
+        console.log(i)
+        const leftSum = (nums) => {
+            if(nums[lIdex-1]){
+                lSum += nums[lIndex-1]
+                lIndex-=1
+                console.log(lIndex)
+                return leftSum(nums)
+            } else {
+                return lSum
+            }
         }
-        const rightSum = (int) => {rSum += int}
-    })
-    return lSum
+        const rightSum = (nums) => {
+            if(nums[rIdex+1]){
+                rSum += nums[rIndex+1]
+                console.log(rSum)
+
+                rIndex+=1
+                console.log(rIndex)
+
+                return rightSum(nums)
+            } else {
+                return rSum
+            }
+        }
+        if(lSum === rSum)
+            return nums[i]
+    }
 
 }
 
 let nums = [1,7,3,6,5,6]
 
 console.log(pivotIndex(nums))
+
+//my recursive functions aren't being called. do they have to be declared outside the main function? will leetcode allow?

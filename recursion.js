@@ -12,13 +12,17 @@ function recurseThis(string){
 
 //recurseThis("this is recursion")
 
-function sumArrayOfNums(arr, index=0, sum=0){
+let sum = 0
+let index = 0
+
+function sumArrayOfNums(arr){
     if(index === arr.length){
         return sum;
     }
     sum += arr[index]
-    console.log(sum)
-    return sumArrayOfNums(arr, index +1, sum)
+    index+=1
+    // console.log(sum)
+    return sumArrayOfNums(arr)
 
 }
 
