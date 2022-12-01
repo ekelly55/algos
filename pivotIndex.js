@@ -51,6 +51,7 @@ function pivotIndex(nums){
             console.log(`lIndex = ${lIndex}`)
             return leftSum(nums)
         } else {
+            console.log(`lIndex = ${lIndex}`)
             console.log(`lSum = ${lSum}`)
         }
     }
@@ -61,10 +62,11 @@ function pivotIndex(nums){
             
             rIndex+=1
             console.log(`rIndex = ${rIndex}`)
-        
+            
             
             return rightSum(nums)
         } else {
+            console.log(`rIndex = ${rIndex}`)
             console.log(`rSum = ${rSum}`)
         }
     }
@@ -73,11 +75,13 @@ function pivotIndex(nums){
         console.log(`i = ${i}`)
         leftSum(nums)
         rightSum(nums)
-        lIndex +=1
-        rIndex +=1
         if(lSum === rSum){
-            console.log(`the pivot index is = ${nums[i]}`)   
-            return nums[i]
+            console.log(`the pivot index is = ${i}`)   
+            return i
+        } else {
+
+            lIndex +=1
+            rIndex +=1
         }
     }
 
