@@ -44,34 +44,43 @@ function pivotIndex(nums){
     let rIndex = 0
     const leftSum = (nums) => {
         if(nums[lIndex-1]){
+            console.log(`current lIndex = ${lIndex}`)
             lSum += nums[lIndex-1]
             console.log(`lSum = ${lSum}`)
             
             lIndex-=1
-            console.log(`lIndex = ${lIndex}`)
+            console.log(`new lIndex = ${lIndex}`)
             return leftSum(nums)
         } else {
-            console.log(`lIndex = ${lIndex}`)
+            console.log(`current lIndex = ${lIndex}`)
             console.log(`lSum = ${lSum}`)
+            lIndex-=1
+            console.log(`new lIndex = ${lIndex}`)
         }
     }
     const rightSum = (nums) => {
         if(nums[rIndex+1]){
+            console.log(`current rIndex = ${rIndex}`)
             rSum += nums[rIndex+1]
             console.log(`rSum = ${rSum}`)
             
             rIndex+=1
-            console.log(`rIndex = ${rIndex}`)
+            console.log(`new rIndex = ${rIndex}`)
             
             
             return rightSum(nums)
         } else {
-            console.log(`rIndex = ${rIndex}`)
+            console.log(`current rIndex = ${rIndex}`)
             console.log(`rSum = ${rSum}`)
+            rIndex+=1
+            console.log(`new rIndex = ${rIndex}`)
         }
     }
     for(i=0; i<nums.length; i++) {
-
+        lIndex = i
+        rIndex = i
+        lSum = 0
+        rSum = 0
         console.log(`i = ${i}`)
         leftSum(nums)
         rightSum(nums)
