@@ -93,11 +93,13 @@ function pivotIndex(nums){
             rIndex +=1
         }
     }
-
+    console.log("there is no pivot index")
+    return -1
 }
 
-let nums = [1,7,3,6,5,6]
+let nums = [-1,-1,-1,-1,0,-1]
 
 pivotIndex(nums)
 
 
+//works for positives. failed w/ negatives. 
