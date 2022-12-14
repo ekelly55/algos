@@ -38,66 +38,29 @@
 // -1000 <= nums[i] <= 1000
 
 function pivotIndex(nums){
-    let lSum = 0
-    let lIndex = 0
-    let rSum = 0
-    let rIndex = 0
-    const leftSum = (nums) => {
-        if(nums[lIndex-1]){
-            console.log(`current lIndex = ${lIndex}`)
-            lSum += nums[lIndex-1]
-            console.log(`lSum = ${lSum}`)
-            
-            lIndex-=1
-            console.log(`new lIndex = ${lIndex}`)
-            return leftSum(nums)
-        } else {
-            console.log(`current lIndex = ${lIndex}`)
-            console.log(`lSum = ${lSum}`)
-            lIndex-=1
-            console.log(`new lIndex = ${lIndex}`)
-        }
-    }
-    const rightSum = (nums) => {
-        if(nums[rIndex+1]){
-            console.log(`current rIndex = ${rIndex}`)
-            rSum += nums[rIndex+1]
-            console.log(`rSum = ${rSum}`)
-            
-            rIndex+=1
-            console.log(`new rIndex = ${rIndex}`)
-            
-            
-            return rightSum(nums)
-        } else {
-            console.log(`current rIndex = ${rIndex}`)
-            console.log(`rSum = ${rSum}`)
-            rIndex+=1
-            console.log(`new rIndex = ${rIndex}`)
-        }
-    }
+    let sumTotal = 0
+    let leftSum = 0
+    //first, calculate total sum
     for(i=0; i<nums.length; i++) {
-        lIndex = i
-        rIndex = i
-        lSum = 0
-        rSum = 0
-        console.log(`i = ${i}`)
-        leftSum(nums)
-        rightSum(nums)
-        if(lSum === rSum){
-            console.log(`the pivot index is = ${i}`)   
-            return i
-        } else {
-
-            lIndex +=1
-            rIndex +=1
-        }
+        sumTotal += nums[i]
+        console.log(`current sumTotal = ${sumTotal}`)
     }
+    //now, calculate left sum at each iteration. subtract it from total. if the difference, minus nums[i] = leftsum, then return nums i
+    for(j=0; j<nums.length; j++){
+        console.log(`current leftSum = ${leftSum}`)
+        if(leftSum === sumTotal - leftSum - nums[j]){
+            console.log(`pivotIndex = ${j}`)
+            return j
+        }
+        leftSum += nums[j]
+        console.log(`new leftSum = ${leftSum}`)
+    }
+    
     console.log("there is no pivot index")
     return -1
 }
 
-let nums = [-1,-1,-1,-1,0,-1]
+let nums = [2,1,-1]
 
 pivotIndex(nums)
 
