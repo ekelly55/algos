@@ -32,44 +32,37 @@
  * @return {boolean}
  */
 
-class HashTable {
-    constructor(){
-        this.table = new Array(s.length)
-        this.size = 0
-    }
-    _hash(key){
-        let hash = 0;
-        for(let i = 0; i < key.lenth; i++){
-            hash += key.charCodeAt(i)
-        }
-        return hash % this.table.length
-    }
-    set(key, value){
-        const index = this._hash(key);
-        this.table[index] = [key, value];
-        this.size++
-    }
-    get(key) {
-        const index = this._hash(key);
-        return this.table[index];
-    }
-    remove(key) {
-        const index = this._hash(key);
-      
-        if (this.table[index] && this.table[index].length) {
-          this.table[index] = undefined;
-          this.size--;
-          return true;
-        } else {
-          return false;
-        }
-      }
-}
-
 var isIsomorphic = function(s, t) {
     //trying with loops
-    for(i=0; i<s.length; i++){
+const mapA = new Map()
+const mapB = new Map()
 
+for(i=0; i<s.length; i++){
+    if(mapA.has(s[i])){
+        console.log(`mapA at ${s[i]} is ${mapA.get(s[i])}`)
+        if(mapA.get(s[i]) !== t[i]){
+            console.log(`mapA at ${s[i]} is not ${t[i]}, strings are not isomorphic`)
+            return false;
+        }
+    } else {
+        mapA.set(s[i], t[i])
+        console.log(`setting mapA at ${s[i]} to ${t[i]}`)
     }
-
+    if(mapB.has(t[i])){
+        console.log(`mapB at ${t[i]} is ${mapB.get(t[i])}`)
+        if(mapB.get(t[i]) !== s[i]){
+            console.log(`mapB at ${t[i]} is not ${s[i]}, strings are not isomorphic`)
+            return false;
+        }
+    } else {
+        mapB.set(t[i], s[i])
+        console.log(`setting mapB at ${t[i]} to ${s[i]}`)
+    }
+}
+console.log("strings are isomorphic")
+return true
 };
+
+let s = "paper"
+let t = "title"
+console.log(isIsomorphic(s, t))
