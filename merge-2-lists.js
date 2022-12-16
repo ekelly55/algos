@@ -19,6 +19,10 @@
 function mergeTwoLists(list1, list2){
 
 
+
+    console.log(list1)
+    console.log(list2)
+
     class LinkedList {
         constructor(head){
             this.head = null
@@ -63,20 +67,39 @@ function mergeTwoLists(list1, list2){
     }
 
     let output = new LinkedList(null)
+    let i = 0
+    if(list1.length && list2.length){
 
-
-    while(){
-        if(l1.head <= l2.head){
-            output.push(l2.head)
-            console.log(output)
-            let temp = l1.head.next
-            console.log(temp)
-            l1.head = temp
-            console.log(l1)
+        while(i <= list1.length || i <= list2.length){
+            console.log(`list1 length is ${list1.length}, list2 length is ${list2.length}`)
+            console.log(`loop number ${i+1}`)
+            if(list1[i] <= list2[i]){
+                output.push(list1[i])
+                output.push(list2[i])
+            } else if(list1[i]>list2[i]){
+                output.push(list2[i])
+                output.push(list1[i])
+            }
+            ++i
         }
-       
-       
-}
+    } else if(list1.length && !list2.length){
+        while(i <= list1.length){
+            console.log(`list1 length is ${list1.length}`)
+            console.log(`loop number ${i+1}`)
+          
+            output.push(list1[i])
+            ++i
+        }
+    } else if(list2.length && !list1.length){
+        while(i <= list2.length){
+
+            output.push(list2[i])
+            ++i
+        }
+    }
+    console.log(output.head)
+    return output.head
+      
 }
 
-mergeTwoLists([1, 2, 4], [1, 3, 4])
+mergeTwoLists([], [])
