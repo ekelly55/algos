@@ -1,47 +1,82 @@
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+//  You are given the heads of two sorted linked lists list1 and list2.
 
+// Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.
+
+// Return the head of the merged linked list.
+/**
+ * @param {ListNode} list1
+ * @param {ListNode} list2
+ * @return {ListNode}
+ */
 
 
 function mergeTwoLists(list1, list2){
-    console.log(list1.head)
-    console.log(list2.head)
+
 
     class LinkedList {
-        constructor(head=null){
-            this.head = head
+        constructor(head){
+            this.head = null
+            this.tail = null
+            this.length = 0
+        }
+        push(val){
+            let newNode = new ListNode(val)
+            if(!this.head){
+                this.head = newNode
+                this.tail = this.head
+            } else {
+                this.tail.next = newNode
+                this.tail = newNode
+            }
+            this.length ++
+            return this
+        }
+        pop(){
+            if(!this.head) return undefined
+            let current = this.head;
+            let newTail = current;
+            while(current.next){
+                newTail = current;
+                current = current.next;
+            }
+            this.tail = newTail
+            this.tail.next = null;
+            this.length --;
+            if(this.length === 0){
+                this.head = null;
+                this.tail = null;
+            }
+            return current
         }
     }
     class ListNode {
-        constructor(value) {
-            this.value=value,
+        constructor(val) {
+            this.val=val,
             this.next=null
         }
     }
-    let l1Node1 = list1[0]
-    let l2Node1 = list2[0]
-    let l1 = new LinkedList(l1node1)
-    let l2 = new LinkedList(l2node1)
+
+    let output = new LinkedList(null)
 
 
-    let output = new LinkedList(head=null)
-    let node1= new ListNode(null)
-    let node2= new ListNode(null)
-    while(l1.head || list2.head){
-        if(list1.head<=list2.head){
-            node1.value=list1.head
-            node1.next=node2
-            list1.head = list1.head.next
-            console.log(node1)
-        } else {
-            node1.value=list2.head
-            node1.next=node2
-            list2.head = list2.head.next
-            console.log(node1)
+    while(){
+        if(l1.head <= l2.head){
+            output.push(l2.head)
+            console.log(output)
+            let temp = l1.head.next
+            console.log(temp)
+            l1.head = temp
+            console.log(l1)
         }
-        output.head=node1
-    }
-    console.log(output)
-    return output
+       
+       
+}
 }
 
-console.log(mergeTwoLists([1, 2, 4], [1, 3, 4]))
-
+mergeTwoLists([1, 2, 4], [1, 3, 4])
