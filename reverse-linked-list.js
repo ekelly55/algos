@@ -54,4 +54,4 @@ var reverseList = function(head) {
 
 head = [1, 2, 3, 4, 5]
 
-console.log (reverseList(head))
+reverseList()
