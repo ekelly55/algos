@@ -33,25 +33,25 @@ class Node {
 
 var reverseList = function(head) {
     console.log(head)
-    let newList = new LinkedList(head)
-    console.log(newList)
-    let n = head;
-    while (n !=null){
-        console.log(n)
+    // let newList = new LinkedList(head)
+    // console.log(newList)
+    // let n = head;
+    // while (n !=null){
+    //     console.log(n)
         
-        let temp = n
-        console.log(temp)
-        head = head.next
-        console.log(head)
-        n = head
-        console.log(n)
+    //     let temp = n
+    //     console.log(temp)
+    //     head = head.next
+    //     console.log(head)
+    //     n = head
+    //     console.log(n)
         
-    }
-    console.log(newList)
-    return newList
+    // }
+    // console.log(newList)
+    // return newList
 
 };
 
 head = [1, 2, 3, 4, 5]
 
-reverseList()
+reverseList([1, 2, 3, 4, 5])
