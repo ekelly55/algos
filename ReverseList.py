@@ -4,7 +4,7 @@ from collections import deque
 
 
 def ReverseList(head):  
-
+    print(type(head))
     list = deque(head)
     print(list)
     
@@ -25,18 +25,31 @@ def ReverseList(head):
                 for elem in nodes:
                     node.next = Node(data=elem)
                     node = node.next
-
-        
+        def add_first(self, node):
+            node.next = self.head
+            self.head = node
         def __repr__(self):
             node = self.head
             nodes = []
             while node is not None:
                 nodes.append(node.data)
                 node = node.next
-            nodes.append("None")
-            return "->".join(nodes)
-    
+                nodes.append("None")
+            return ",".join(str(node) for node in nodes)
+      
+    OutPutList = LinkedList()
 
+    while len(list) != 0:
+      
+        print(list)
+        OutPutNode = Node(list.popleft())
+        OutPutList.add_first(OutPutNode)
+        
+
+    print(OutPutList)
+    return OutPutList
 
 head = [1, 2, 3, 4, 5]
-print(ReverseList(head))
+ReverseList(head)
+
+# leetcode says head not iterable (constructing deque), but they give it to you as an iterable list
