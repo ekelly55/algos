@@ -24,3 +24,4 @@ function printLinkedList(head){
 }
 
 console.log(printLinkedList(a))
+
