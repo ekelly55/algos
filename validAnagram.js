@@ -55,3 +55,5 @@ let str1 = "   a"
 let str2 = " A  "
 
 console.log(validAnagram(str1, str2))
+
+//can also just make one freqauency coutner and as you loop thru second string, see it it's in the counter. if it is, decrement it's value so you can keep track of if the nubmers of occurrences are the same. 
