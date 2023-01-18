@@ -45,4 +45,72 @@ function freqCounter (ar1, ar2){
 let ar1=[1, 0, 3]
 let ar2=[2, 4, 9]
 
-console.log(freqCounter(ar1, ar2))
+//console.log(freqCounter(ar1, ar2))
+
+//given 2 positive int, find out if the two nums have the same freq of digits
+//ON time complexity. 
+
+//need to iterate through each, note how many times each digit occurs. order does not not matter. if the times match, true. 
+
+//eg: 182, 281 true
+//23, 24 false
+
+function sameFreq(num1, nun2){
+    //we need to be able to iterate through them, so turn then to strings
+    num1 = num1.toString()
+    num2 = num2.toString()
+    console.log(`num1 is ${num1}`)
+    console.log(`num2 is ${num2}`)
+
+    if(num1.length !== num2.length){
+        return false
+    }
+    //first establish our counters
+    let counter1 = {}
+    console.log("counter1 is")
+    console.log(counter1)
+    let counter2 = {}
+    console.log("counter2 is")
+    console.log(counter2)
+    
+    //will need a seperate loop for each to map them to the counter objects
+    //loop 1
+    for(digit of num1){
+        counter1[digit] = (counter1[digit] || 0) + 1
+        console.log("counter1 is")
+        console.log(counter1)
+    }
+    //loop 2
+    for(digit of num2){
+        counter2[digit] = (counter2[digit] || 0) + 1
+        console.log("counter2 is")
+        console.log(counter2)
+    }
+    //now we need to check if they match
+    for(key in counter1){
+        //first, let's check if there is key match
+        if(key in counter2){
+            //then check if the values match
+            if(counter1[key] !== counter2[key]){
+                console.log("false: frequencies don't match")
+                return false
+            }
+        }else{
+
+            
+            console.log("false: digits don't match")
+            return false
+        }
+    }
+        //once that condition satisfied, check if values match
+
+    //if it passes all conditionals, return true
+    
+    console.log(true)
+    return true
+}
+
+let num1 = 81130
+let num2 = 81330
+
+sameFreq(num1, num2)
