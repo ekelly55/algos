@@ -50,4 +50,33 @@ return false
 
 }
 //what if the args are all falsy values? works
-duplicates(null, undefined)
+//duplicates(null, undefined)
+
+//do it as a binary search (mulitpointer)
+
+function areThereDuplicates(...args){
+   //first, sort args
+   args.sort()
+   console.log(args)
+   //declare two pointers. because it's sorted, we only have to compare two consecutive args
+   let start = 0
+   let next = 1
+   //iterate through the args. if any consecutive args are equal, true, if not, iterate start and next
+   while(next < args.length){
+    if(args[start] === args[next]){
+        console.log(true)
+        return true
+        
+    } else {
+        start ++
+        next ++
+    }
+}
+//if never return true, then no dupes, return false
+console.log(false)
+   return false
+}
+
+areThereDuplicates(null, undefined, false, false, true)
+
+//can't recognize complex data types. other one is better.
