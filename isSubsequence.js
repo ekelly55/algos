@@ -101,8 +101,12 @@ function isSubSequence2(str1, str2){
     console.log(`number of matches is ${match}`)
     
     //do a while loop, while left<right
-    while(left2<right2){
+    while(left2<=right2){
         //if no match on the left, move forward w/ left on str2
+        if(match === str1.length){
+            console.log(`all chars in str1 match. true`)
+            return true
+        }
         console.log(`comparing`)
         if(str2[left2] !== str1[left1]){
             console.log(`${str2[left2]} and ${str1[left1]} don't match. increment left2 pointer`)
@@ -113,10 +117,6 @@ function isSubSequence2(str1, str2){
             console.log(`${str2[left2]} and ${str1[left1]}  match. increment number of matches`)
             match++
             console.log(`number of matches is ${match}`)
-            if(match === str1.length){
-                console.log(`all chars in str1 match. true`)
-                return true
-            }
             console.log(`${str2[left2]} and ${str1[left1]}  match. increment both left pointers`)
             left2++
             console.log(`the left2 pointer is at ${str2[left2]}`)
@@ -124,6 +124,10 @@ function isSubSequence2(str1, str2){
             console.log(`left1 pointer is at ${str1[left1]}`)
         }
         //do same w/ right
+        if(match === str1.length){
+            console.log(`all chars in str1 match. true`)
+            return true
+        }
         if(str2[right2] !== str1[right1]){
             console.log(`${str2[right2]} and ${str1[right1]} don't match. decrement right2 pointer`)
             
@@ -134,11 +138,6 @@ function isSubSequence2(str1, str2){
             match++
             console.log(`number of matches is ${match}`)
 
-            if(match === str1.length){
-                console.log(`all chars in str1 match. ${true}`)
-                
-                return true
-            }
             console.log(`${str2[right2]} and ${str1[right1]}  match. decrement both right pointers`)
 
             right2--
@@ -153,7 +152,7 @@ function isSubSequence2(str1, str2){
     console.log(`no match ${false}`)
     return false
 }
-isSubSequence2("135", "12345")
+isSubSequence2("!#", "#!$%")
 
 //pattern ace, abcde is not working. 
 //compare 1 and 1. match = 1

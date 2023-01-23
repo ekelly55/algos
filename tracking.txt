@@ -1,38 +1,48 @@
+with just less than: 
 
-comparing
+node isSubsequence.js 
+the left2 pointer is at index 0 of str2
+the right2 pointer is at index 4of str2
+left1 pointer is at index 0of str1
+right1 pointer is at index 2of str1
+number of matches is 0
+
+comparing 1 and 1 on left
+
+
 1 and 1  match. increment number of matches
 number of matches is 1
+
+setting up pointers for next L comparison
+
 1 and 1  match. increment both left pointers
 the left2 pointer is at 2
 left1 pointer is at 3
+
+comparing 5 and 5 on right
+
 5 and 5 match. increment number of matches
 number of matches is 2
+
+setting up right pointers for next R comparison
+
 5 and 5  match. decrement both right pointers
 right2 pointer is at 4
 right1 pointer is at 3
-comparing
+
+comparing 2 and 3 on left
+
 2 and 3 don't match. increment left2 pointer
 the left2 pointer is at 3
+
+moving left2 pointer for next comparison
+
+comparing 4 and 3 on the right 
+
 4 and 3 don't match. decrement right2 pointer
 right2 pointer is at 3
-comparing
-3 and 3  match. increment number of matches
-number of matches is 3
-3 and 3  match. increment both left pointers
-the left2 pointer is at 4
-left1 pointer is at 3
-3 and 3 match. increment number of matches
-number of matches is 4
-all chars in str1 match. true
 
-first compare 1 and 1
-match
-compare 5 and 5
-match
-compare 3 and 2
-not match
-compare 3 and 4
-no match
-compare 3 and 3
-match
-compare 3 and 
+moving the right pointer for the next right comparison
+
+
+no match false
