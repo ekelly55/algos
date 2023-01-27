@@ -80,8 +80,9 @@ function minSubArrayLen(arr, n){
     let subLength
     let sum = arr[start] + arr[end]
     console.log(`sum is ${sum}`)
-    //need a temp sum to store current best while we look for other
+    //need a max sum to store current best while we look for other
     let maxSum = 0
+    let target = false
     //delcare a temp sub array length to compare
     let minSubLen = arr.length
 
@@ -94,9 +95,10 @@ function minSubArrayLen(arr, n){
         console.log("target not at start or end index. start looping through")
     }
     //now do a while loop, expanding and shifting the window as necessary,
-    while(0 <= start < end < arr.length){
+    while(end < arr.length-1){
         //add until sum >= n
         if(sum < n){
+            target = false
             console.log(`sum is smaller than n, extend the window`)
             end++
             console.log(`new end index is ${end}. checking if arr at end hits target`)
@@ -106,36 +108,37 @@ function minSubArrayLen(arr, n){
             } 
             console.log("new end point doesn't hit target. increase the sum")
             sum += arr[end]
-            //make maxSum the higher of the two
-            maxSum = Math.max(sum, maxSum)
             console.log(` new sum is ${sum}`)
+            maxSum = Math.max(sum, maxSum)
     
-        } else {
+        } else if(start < arr.length){
 
             
-            
-            //make maxSum the higher of the two
-            maxSum = Math.max(sum, maxSum)
-            console.log(` maxSum is is ${maxSum}`)
+            target = true
+    
             //now calculate subLength
             subLength = end-start+1
             //now make minSubLen the shorter of the two
             minSubLen = Math.min(subLength, minSubLen)
             console.log(` min sub string length is ${minSubLen}`)
-        }
             //now see if you can shorten the window
-            //remove the current val at start index from the sum and set maxSum to the greater of the two
+            //remove the current val at start index from the sum
             sum -= arr[start]
             maxSum = Math.max(sum, maxSum)
             //then increment the start
             start ++
             console.log(` incrementing start to check for better sub string length. new start index  is ${start}. current end index is ${end}. new sum is ${sum}`)
             //make maxSum the higher of the two
-        }
+        }  
+    } 
+    if(maxSum < n){
+        minSubLen = 0
+    }
+
 
 //we know we're gonna return the diff between the pointers
     console.log(`the min length is ${minSubLen}`)
     return minSubLen
 }
 
-minSubArrayLen([1,4,16,22,5,7,8,9,10],39) // 3
+minSubArrayLen([1,4,16,22,5,7,8,9,10],95) // 0
