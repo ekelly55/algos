@@ -141,4 +141,56 @@ function minSubArrayLen(arr, n){
     return minSubLen
 }
 
-minSubArrayLen([1,4,16,22,5,7,8,9,10],95) // 0
+//minSubArrayLen([1,4,16,22,5,7,8,9,10],95) // 0
+
+function findLongestSS(str){
+    //input string
+    //output int: length of longest substring
+    //max length is str.length
+    //first, declare window pointers
+    let open = 0
+    let close = 1
+    //declare the count
+    let maxCount = 1
+
+    //if string is emtpy:
+    if(str.length === 0){
+        console.log(0)
+        return 0
+    }
+    //we need a frequency counter to track values between open and close
+    let counter = {}
+    //declare a var to track the number of keys. keys will only exists as long as their value is one, so the keycount will vary. maxCount will store the highest keyCount
+    keyCount = 1
+    //write a while loop to iterate through array
+    // console.log(`incrementing ${str[open]} in counter`)
+    counter[str[open]] = 1;
+    // console.log(`new value is ${counter[str[open]]} `)
+    console.log(counter);
+   while(close<str.length){
+        //first, add value at open to the counter object if it doesn't exist, and increment it.  why is the key showing as undefined and why is neither conditional running?
+        //next, check if value at close exists as a key in object. if not, add value at close to counter and increment close
+        if(!counter.hasOwnProperty(str[close])){
+            counter[str[close]] = 1
+            console.log(`adding ${str[close]} to counter`)
+            console.log(counter)
+            keyCount ++
+            maxCount = Math.max(maxCount, keyCount)
+            
+            close ++
+        } else {
+            //if it exists already, remove val at open from counter and increment open to narrow the window
+            
+            console.log(`${str[close]} already in counter. remove ${str[open]} from counter, increment open and try again`)
+            delete(counter[str[open]])
+            console.log(counter)
+            keyCount --
+            open ++
+            
+        }
+    }
+    console.log(maxCount)
+    return maxCount
+}
+
+findLongestSS(" asdreghy ")
