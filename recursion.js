@@ -106,4 +106,88 @@ function recurFactorial(num){
     return num * recurFactorial(num - 1)
 }
 
-console.log(recurFactorial(5))
+// console.log(recurFactorial(5))
+
+//helper recursion
+
+function collectOdds(arr){
+    let result = []
+    
+    function helper(input){
+        if(input.length === 0){
+            return
+            //here's our base case 
+        }
+        if(input[0]%2 !==0){
+            //then it's odd
+            result.push(input[0])
+        }
+        //now we remove that index and recur
+        helper(input.slice(1))
+    }
+    //now we have to call it
+    helper(arr)
+
+    return result
+}
+//pure recursion
+function collectAllOdds(arr){
+    //declare out output. it will be empty each  new time
+    let newArr = []
+    //base case
+    if(arr.length === 0){
+        return newArr;
+    }
+    //if it's not the base case yet, check if its odd, push it into the output
+    if(arr[0]%2 !== 0){
+        newArr.push(arr[0])
+    }
+    //this is where we recurr. the newArr will be the current newArr added to all the outputs of the  recursive functions. it's ok that it's redefined as empty each time, because we're going o recurr and add each of the output arrays together
+    newArr = newArr.concat(collectAllOdds(arr.slice(1)))
+   return newArr
+} 
+
+//sample input arr = [1, 2, 3, 4, 5]
+
+//sample output = 
+    //newArr = [1].concat(collectAllOds([2, 3, 4, 5]))
+        //newArr = [].concat(collectAllOdds(3, 4, 5))
+            //newArr = [3].concat(collectAllOdds[4, 5])
+                //newArr = [].concat(collectAllOddds([5]))
+                    //newArr = [5].concat(collectAllOdds([]))
+                        //newArr = []
+                    //newArr = [] concat [5] = [5]
+                //newArr = [5] concat [] = [5]
+            //newArr = [5] concat [3] = [3, 5]
+        //newArr = [] concat [3, 5]
+    //newArr = [1] concat [3, 5]
+//newArr = [1, 3, 5]
+
+//power function
+
+//Write a function called power which accepts a base and an exponent. The function should return the power of the base to the exponent. This function should mimic the functionality of Math.pow()  - do not worry about negative bases and exponents.
+
+function power(num, exp){
+
+    //what's our base case? exp = 0, return 1
+    let output = 1
+
+    function helper(num, exp){
+
+        if(exp === 0){
+            return 1
+        }
+        //and here's where we want to run it. we're not doing anything with the exp
+        output = output.num
+        console.log(output)
+        exp --
+        //now we call it again, with the new exp
+        helper(num, exp)
+    }
+
+    helper(num, exp)
+    console.log(output)
+    return output
+}
+
+power(2, 4)
