@@ -178,7 +178,7 @@ function power(num, exp){
             return 1
         }
         //and here's where we want to run it. we're not doing anything with the exp
-        output = output.num
+        output = output*num
         console.log(output)
         exp --
         //now we call it again, with the new exp
@@ -190,4 +190,46 @@ function power(num, exp){
     return output
 }
 
-power(2, 4)
+//power(2, 0)
+
+
+//Write a function factorial which accepts a number and returns the factorial of that number. A factorial is the product of an integer and all the integers below it; e.g., factorial four ( 4! ) is equal to 24, because 4 * 3 * 2 * 1 equals 24.  factorial zero (0!) is always 1.
+
+//again!
+function factorial(num){
+    //base case 
+    if(num === 0){
+        return 1
+    }
+    //interesting: calling num-- doesn't work. you have to specify
+    return num * factorial(num-1)
+
+}
+
+console.log(factorial(5))
+
+
+
+//sample output:
+    //callstack = factorial 5
+        //5 x factorial 4
+            //callstack = factorial4, factorial 5
+                //4 x factorial 3
+                    //callstack = factorial 3, factorial 4, factorial 5
+                        //3 factorial 2
+                            //callstack = F2, f3, f4, f5
+                                //2 factorial 1
+                                    //CS = f1,f2, f3, f4, f5
+                                        //1factorial 0
+                                            //cs = f0, f1, f2, f3, f4, f5
+                                                //f0 = 1
+                                            //cs = f1, f2 f3 f4 f5
+                                            //f1 = 1 x 1 = 1
+                                        //cs = f2 f3 f4 f5
+                                        //f2 = 2 x 1 = 2
+                                    //cs = f3 f4 f5
+                                //f3 = 3 x 2 = 5
+                            //cs = f4 f5
+                        //f4 = 4 x 5 = 20
+                    //cs = f5 = 5 x 20 = 120
+
