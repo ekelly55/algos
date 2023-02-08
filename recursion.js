@@ -196,17 +196,18 @@ function power(num, exp){
 //Write a function factorial which accepts a number and returns the factorial of that number. A factorial is the product of an integer and all the integers below it; e.g., factorial four ( 4! ) is equal to 24, because 4 * 3 * 2 * 1 equals 24.  factorial zero (0!) is always 1.
 
 //again!
-function factorial(num){
-    //base case 
-    if(num === 0){
-        return 1
+function productOfArray(arr){
+    //base case. when the array is gone, add zero to the sum
+    if(arr.length === 0){
+        return 0
     }
-    //interesting: calling num-- doesn't work. you have to specify
-    return num * factorial(num-1)
+    //while array exists, access the arr[0] after each slice and add it
+    return arr[0] + productOfArray(arr.slice(1))
 
 }
 
-console.log(factorial(5))
+
+console.log(productOfArray([3, 4, -5, 10, 0, 100]))
 
 
 
