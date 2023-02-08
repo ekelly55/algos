@@ -207,30 +207,41 @@ function productOfArray(arr){
 }
 
 
-console.log(productOfArray([3, 4, -5, 10, 0, 100]))
+// console.log(productOfArray([3, 4, -5, 10, 0, 100]))
+
+function recurRange(num){
+    if(num === 0){
+        return 0
+    }
+    return num + recurRange(num-1)
+}
+
+// console.log(recurRange(5))
 
 
+//accepts a number and returns the nth number in the Fibonacci sequence
+function fib(num){
+    //declare sum
+    previous = 0
+    current = 1
+    next = 0
+    //create recursive helper function
+    function fibSum(input){
 
-//sample output:
-    //callstack = factorial 5
-        //5 x factorial 4
-            //callstack = factorial4, factorial 5
-                //4 x factorial 3
-                    //callstack = factorial 3, factorial 4, factorial 5
-                        //3 factorial 2
-                            //callstack = F2, f3, f4, f5
-                                //2 factorial 1
-                                    //CS = f1,f2, f3, f4, f5
-                                        //1factorial 0
-                                            //cs = f0, f1, f2, f3, f4, f5
-                                                //f0 = 1
-                                            //cs = f1, f2 f3 f4 f5
-                                            //f1 = 1 x 1 = 1
-                                        //cs = f2 f3 f4 f5
-                                        //f2 = 2 x 1 = 2
-                                    //cs = f3 f4 f5
-                                //f3 = 3 x 2 = 5
-                            //cs = f4 f5
-                        //f4 = 4 x 5 = 20
-                    //cs = f5 = 5 x 20 = 120
+        //establish base case
+        if(input === 1){
+            //when the number counts down to 0, add zero to the sum
+            return 
+        }
+        next = previous + current //1, 2, 3, 5
+        previous = current //1, 1, 2, 3,
+        current = next//1, 2, 3
+       
+        fibSum(input-1)
+         
+    }
+    fibSum(num)
+    return current
+}
 
+console.log(fib(35))
