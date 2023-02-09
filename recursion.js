@@ -98,11 +98,12 @@ function iterFactorial(num){
 // iterFactorial(5)
 
 function recurFactorial(num){
-    
-    if(num === 1){
-     return 1
+    //this solutions doesn't account for inputs less than 1. adding that in here
+    if(num<0) return 0
+    if(num <= 1) return 1
+ 
      //same as sum range, we're just muliplying. when you run factorial(1), we want that to equal 1
-    }
+    
     return num * recurFactorial(num - 1)
 }
 
@@ -190,6 +191,14 @@ function power(num, exp){
     return output
 }
 
+function power2(base, exp){
+    if(exp === 0){
+        return 1
+    }
+    return base*power2(base, exp-1)
+}
+// console.log(power2(2,3))
+
 //power(2, 0)
 
 
@@ -244,4 +253,23 @@ function fib(num){
     return current
 }
 
-console.log(fib(35))
+
+
+// console.log(fib(35))
+
+//more optimized version, with a correction on colt's
+
+function fib2(n){
+    if(n<=0) return NaN
+    if(n<=2) return 1;
+    return fib(n-1) + fib(n-2);
+}
+
+console.log(fib2(5))
+
+// //sample output:
+// //fib2(5) = fib2(4) + fib2 3
+//         = (fib2 3 + fib2 2) + (fib2 2 + fib2 1)
+//         = {[fib2 2 + fib2 1] + 1} + (1 + 1)
+//         = {[1+1] +1} + 2
+//very elegant solution. reminds me a bit of search algos, where you breawk things down until they're incremennts of 1
