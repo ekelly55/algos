@@ -6,7 +6,7 @@
 
 // Return the leftmost pivot index. If no such index exists, return -1.
 
- 
+
 
 // Example 1:
 
@@ -30,37 +30,37 @@
 // The pivot index is 0.
 // Left sum = 0 (no elements to the left of index 0)
 // Right sum = nums[1] + nums[2] = 1 + -1 = 0
- 
+
 
 // Constraints:
 
 // 1 <= nums.length <= 104
 // -1000 <= nums[i] <= 1000
 
-function pivotIndex(nums){
+function pivotIndex(nums) {
     let sumTotal = 0
     let leftSum = 0
     //first, calculate total sum
-    for(i=0; i<nums.length; i++) {
+    for (i = 0; i < nums.length; i++) {
         sumTotal += nums[i]
         console.log(`current sumTotal = ${sumTotal}`)
     }
     //now, calculate left sum at each iteration. subtract it from total. if the difference, minus nums[i] = leftsum, then return nums i
-    for(j=0; j<nums.length; j++){
+    for (j = 0; j < nums.length; j++) {
         console.log(`current leftSum = ${leftSum}`)
-        if(leftSum === sumTotal - leftSum - nums[j]){
+        if (leftSum === sumTotal - leftSum - nums[j]) {
             console.log(`pivotIndex = ${j}`)
             return j
         }
         leftSum += nums[j]
         console.log(`new leftSum = ${leftSum}`)
     }
-    
+
     console.log("there is no pivot index")
     return -1
 }
 
-let nums = [2,1,-1]
+let nums = [2, 1, -1]
 
 pivotIndex(nums)
 
