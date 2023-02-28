@@ -67,7 +67,7 @@ def dictSwitch():
 
         
 
-dictSwitch()
+# dictSwitch()
 
 def revString(str):
     rev = ""
@@ -78,7 +78,7 @@ def revString(str):
     
     print(rev)
 
-revString("python")
+# revString("python")
 
 
 import random
@@ -98,7 +98,7 @@ def factorial(num):
     else:
         return num*factorial(num-1)
 
-print(factorial(5))
+# print(factorial(5))
 
 
 def calculator():
@@ -122,9 +122,35 @@ def calculator():
         else:
             print('invalid operator')
 
-calculator()
+# calculator()
 
-
+# armstrong num is each digit to the power of the length of the number, added up, equals the number
+#first off, need to deconstruct nums into long form. to string, slice, to int?
 def armstrongNum(num):
-    return
+    #declare total var
+    total = 0
+    #convert num to string
+    numStr = str(num)
+    #declare power var
+    p = len(numStr)
 
+    #loop to deconstruct num
+    for digit in numStr:
+        digit = numStr[len(numStr)-1:len(numStr)]
+        print(digit)
+        #slice off end
+        total += int(digit)**p
+        print(total)
+        #slice end off num string
+        numStr = numStr[:-1]
+        print(numStr)
+        
+
+    if total == int(num):
+        print(True)
+        return True
+    else:
+        print(False)
+        return False
+
+armstrongNum(944)
