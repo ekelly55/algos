@@ -136,14 +136,12 @@ def armstrongNum(num):
 
     #loop to deconstruct num
     for digit in numStr:
-        digit = numStr[len(numStr)-1:len(numStr)]
+        #slice off end no need to slice if not worrying about place value
         print(digit)
-        #slice off end
         total += int(digit)**p
         print(total)
-        #slice end off num string
-        numStr = numStr[:-1]
-        print(numStr)
+
+
         
 
     if total == int(num):
@@ -153,4 +151,30 @@ def armstrongNum(num):
         print(False)
         return False
 
-armstrongNum(944)
+# armstrongNum(0)
+
+#count vowels instance is in str
+
+def countVowels(str):
+    vowels = 'aeiou'
+    # for letter in vowels:
+    #     counter[letter] = 0
+    # better way without loop
+    # counter = {}.fromkeys(vowels, 0)
+    #this initializes the counter with keys taken from iterating through string, each w/ 0 as initial val. study this method. without the zero, it would initialize values as 'none' making it imposible to inrement the count. 
+
+    #or can use a dictionary comprehension. will make it AND not allow dupes...can it do it all in one? need a helper func if trying to do it all at once. no, b/c have to call counter dict while constructing the counter dict. 
+
+
+
+    vowel_counter = {i:0  for i in vowels}
+  
+    for char in str: 
+        if char in vowel_counter:
+            vowel_counter[char] += 1
+    print(vowel_counter)
+    #if don't want to print in dict form:
+    for k, v in vowel_counter.items(): 
+        print(k, '=', v)
+
+countVowels('ice cream')

@@ -1,0 +1,45 @@
+what's the walrus operaator?
+
+#helpful string methods: isalpha() check if any string is made up entirely of letters, UPPER OR LOWER   
+# str() turn num into string, int() and str into num
+#str[:-1] slice off last letter, keep rest of string
+#str[::-1] reverse the string
+#str[len(str)-1: len(str)] slice off all but last char
+
+#if want to change a value conditionally, place the conditional at the beginning of yr expression. saves time. won't execute function if i doesn't fit condition
+#NEED IF ELSE HERE?
+
+original_prices = [1.25, -9.45, 10.22, 3.78, -5.92, 1.16]
+
+#'make a new list of prices with each price being the original price if it not negative, or set negative prices to zero'
+prices = [i if i>0 else 0 for i in original_prices]
+
+LOOK INTO SET AND DICT COMP
+
+DON'T USE LIST COMP w large numbers: use generators. don't store in mem
+
+#Every comprehension of the list can be rewritten in for loop, but in the context of list interpretation, every for loop can not be rewritten. WHAT DOES THIS MEAN?
+
+#watch out for nested comps: that's gonna be n^2. just don't nest when you don't have to. 
+
+    #BUT nested lists are a common way to create matrices, used for math. LOOK INTO MATRICES
+
+#list comp loads entire output into memory. fine for small and medium sized lists, but large will mess up comp. 
+
+#if it's a large list, use a generator instead. a generator returns an iterable, lazy eval= only eval when needed. not stored first in mem. do all generators use lazy eval?
+
+#how to choose (in general): if performance matters (will on interview), then see what's fastest/best for mem. if not, then go with whatever yeilds cleanest code
+
+#can use timeit library to see which is best import it, then call timeit.timeit(func, number=whatever) run it for whatever number of iterations you tell it to. 
+
+
+remember dict.items() to access each key value pair. otherwise will just access one argument
+
+understand .items, .enumerate, and .fromkeys
+
+
+Lists	Tuples	Sets	Dictionaries
+A list is a collection of ordered data.	
+A tuple is an ordered collection of data.	
+A set is an unordered collection.	
+A dictionary is an unordered collection of data that stores data in key-value pairs.
