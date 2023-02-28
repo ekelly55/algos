@@ -50,3 +50,24 @@ look into classes and when and why to use? certainly when working w/ user define
 what are exceptions and when to use? 
 
 class constructors: don't for get double underscores on def __init__(self)
+
+this doesn't contain anything on linked lists.  HAVE TO LEARN THAT!
+
+also learn all built in data structures and when to use.
+
+# deque (diff from 'dequeue') but isn't htere a library you can import for this?
+
+#it's a double ended queue: can add or remove from either end. all same methods, but for both ends. preferred over list when need to optimize append and pop (and don't nec. need access in between ends). time for deque append and pop are O1, rather tha ON for list append and pop. # input restricted: input limited at one end, deletion permitted on both. output restricted: add to both ends, remove from one. can use collections.deque (import collections) to turn a list into a deque. built in methds are append (right end, as usual) and appendleft (at 0 end) and pop() and popleft()
+
+#deque collections access methods: 
+    #index(ele, beg, end): returns index of first occurence of element in args, searching from beg to end
+    #insert(i, a): inserts val a at index i
+    #remove(a) removes first occurrence of val a
+    # count(a) counts number of occurrences of val a 
+
+#access front w/ [0] and back w/ [-1]
+#len(deque) method
+#extend(iterable): add mult vals to right of deque
+#extendleft(iterable): same at front
+#reverse()
+#rotate(num): rotates deque by num indicated. if neg, rotates left
