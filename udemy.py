@@ -177,4 +177,119 @@ def countVowels(str):
     for k, v in vowel_counter.items(): 
         print(k, '=', v)
 
-countVowels('ice cream')
+# countVowels('ice cream')
+
+#find max and min val in dict and return key
+
+d={'a': 10, 'b':2, 'c': -1, 'd': 5, 'e': -7}
+# print(d.items())
+
+#using a class based approach...why? look into classes. it just seems like excess code. 
+
+class MaxMinFind():
+    
+    def min_val_find(self, d):
+        min_val = list(d.values())[0]
+        min_key = list(d.keys())[0]
+        #just initialilzing it. will not nec be index 0
+
+        for k, v in d.items():
+            if v < min_val:
+                min_val = v
+                min_key = k
+        
+        print( f'key = {min_key} value = {min_val}')
+
+    def max_val_find(self, d):
+        max_val = list(d.values())[0]
+        max_key = list(d.keys())[0]
+        #just initialilzing it. will not nec be index 0
+
+        for k,v in d.items():
+            if v > max_val:
+                max_val = v
+                max_k = k
+        
+        print(f'key = {max_key}, value = {max_val}')
+
+mmf  = MaxMinFind()
+
+# mmf.min_val_find(d)
+
+# mmf.max_val_find(d)
+
+#extract integer numbers from string
+
+def intFromStr(string):
+
+    #declare holder for ints
+    ints = []
+    current_index = 0 #in ints
+
+    start = 0 #in string
+    end = 1 #in string
+    
+    #iterate and check if characters are numbers
+    
+    # for char in string: 
+    #     if char.isnumeric():
+    #         # if it's a number, then append it to the existing num in the array
+    #         ints[current_index] = ints[current_index] + char
+    #         print(ints)
+    #     else:
+    #         #if it's not, then increment index if current index not blank
+    #         if not ints[current_index] == "":
+    #             current_index += 1
+    #             print(current_index)
+    #             #and set new index to empty string
+    #             ints.append("")
+    #             print(ints)
+    #             #but doesn't account for decimals and leaves an emtpy index at the end. also, shouldn't it return actuall integers? 
+
+    #another method using two pointers
+    while end < len(string):
+        if string[start].isnumeric():
+            #how do we get it to skip this on the next iteration?
+            ints[current_index] = ints[current_index] + string[start]
+            print(ints)
+            if string[end].isnumeric():
+                ints[current_index] = ints[current_index] + string[end]
+                print(ints)
+                end += 1
+            else: 
+                #if end isn't numeric, then this int is done, prepare a new index (with blanks string) and iterate start and end
+                current_index += 1
+                ints.append("")
+                start += 1
+                end += 1
+                print(ints)
+
+
+    
+        else:
+            #prepare a new index, start and end
+            current_index += 1
+            ints.append("")
+            start += 1
+            end += 1
+            print(ints)
+
+    print(ints)
+
+        #so dumb. the problem should be extract numerals, not integers.
+
+s = "ax-24b8az/4.3/3fflke"
+
+def extract_nums(string):
+
+    ints = []
+
+    for char in string:
+        if char.isnumeric():
+            num = int(char)
+            ints.append(char)
+
+    return ints        
+
+print(extract_nums(s))
+

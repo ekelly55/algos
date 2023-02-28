@@ -37,9 +37,16 @@ remember dict.items() to access each key value pair. otherwise will just access 
 
 understand .items, .enumerate, and .fromkeys
 
+.items() returns a list of tupes containing keys and values (allwithin parentheses...not sure what that is)
 
 Lists	Tuples	Sets	Dictionaries
 A list is a collection of ordered data.	
 A tuple is an ordered collection of data.	
 A set is an unordered collection.	
 A dictionary is an unordered collection of data that stores data in key-value pairs.
+
+look into classes and when and why to use? certainly when working w/ user defined data structures i.e. stack
+
+what are exceptions and when to use? 
+
+class constructors: don't for get double underscores on def __init__(self)
