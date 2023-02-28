@@ -68,3 +68,63 @@ def dictSwitch():
         
 
 dictSwitch()
+
+def revString(str):
+    rev = ""
+    for char in str:
+        rev = char + rev
+    # or
+    print(str[:: -1])
+    
+    print(rev)
+
+revString("python")
+
+
+import random
+
+def coinToss():
+    toss = random.randint(0, 1)
+    #choose a random integer between starting and ending point
+    if toss == 0:
+        print
+
+
+#recursive factorial
+
+def factorial(num):
+    if num == 0:
+        return 1
+    else:
+        return num*factorial(num-1)
+
+print(factorial(5))
+
+
+def calculator():
+    #to have this run until user says stop:
+    while True:
+        quit = input('press y to quit and n to continue').lower()
+        if quit == 'y':
+            print('thanks for using my calculator')
+            break
+        num1 = float(input("enter first number: "))
+        num2 = float(input("enter second number: "))
+        op = (input("enter operator: "))
+        if op == "+":
+            print(num1 + num2)
+        elif op == "-":
+            print(num1-num2)
+        elif op == "x":
+            print(num1*num2)
+        elif op == "/":
+            print(num1/num2)
+        else:
+            print('invalid operator')
+
+calculator()
+
+
+def armstrongNum(num):
+    return
+
