@@ -73,3 +73,6 @@ also learn all built in data structures and when to use.
 #rotate(num): rotates deque by num indicated. if neg, rotates left
 
 // floor division: returns int, not float or decimal (what is a float)
+
+
+.remove() in lists and arrs!!!!!!!! much easier than slicing and concatenation
