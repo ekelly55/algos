@@ -81,3 +81,56 @@ def SelSort(lst):
     return lst
 
 SelSort(lst)
+
+#merge sort: most efficient. needs two functions: one that merges two sorted lists, and one that recursively splits the input in half
+# merge two lists
+def merge(left, right):
+    if len(left) == 0:
+        return right
+    
+    if len(right) == 0:
+        return left
+    
+    result = []
+
+    index_left = index_right = 0
+
+     # Now go through both arrays until all the elements
+    # make it into the resultant array
+    while len(result) < len(left) + len(right):
+        if left[index_left] <= right[index_right]:
+            result.append(left[index_left])
+            index_left += 1
+        else:
+            result.append(right[index_right])
+            index_right += 1
+        
+         # If you reach the end of either array, then you can
+        # add the remaining elements from the other array to
+        # the result and break the loop
+        if index_right == len(right):
+            result += left[index_left:]
+            break
+
+        if index_left == len(left):
+            result += right[index_right:]
+            break
+    
+    return result
+
+# now a func that recursively splits in half
+def merge_sort(lst):
+      # If the input array contains fewer than two elements,
+    # then return it as the result of the function
+    if len(lst) < 2:
+        return lst
+    
+    midpoint = len(lst) // 2
+
+      # Sort the array by recursively splitting the input
+    # into two equal halves, sorting each half and merging them
+    # together into the final result
+    return merge(
+        left=merge_sort(lst[:midpoint]),
+        right=merge_sort(lst[midpoint:])
+    )

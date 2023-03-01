@@ -291,5 +291,46 @@ def extract_nums(string):
 
     return ints        
 
-print(extract_nums(s))
+# print(extract_nums(s))
 
+#reverse string and list
+string = "!ereht olleh"
+# print(string[::-1])
+string = [*string]
+# print(string)
+string.reverse()
+# print(string)
+string = string[::-1]
+# print(string)
+string = "".join(string)
+
+
+
+def fibo(num):
+
+    #recursive, base case:
+    if num == 2:
+        return 1
+    if num == 1:
+        return 1
+    
+    return fibo(num-2) + fibo(num - 1)
+
+# print(fibo(8))
+
+# nums percentages: given a list of nums, calculate the percentage of neg nums, posi nums and zeros
+
+import time
+
+def timer():
+    for hour in range(1,24):
+        for minute in range(1,60):
+            for sec in range(1,60):
+                print(f'{hour}:{minute}:{sec}')
+                time.sleep(1)
+                #sleeps program for 1 s.
+
+timer()         
+#it just runs, printing elapsed time every second. 
+
+#student database program
