@@ -71,3 +71,5 @@ also learn all built in data structures and when to use.
 #extendleft(iterable): same at front
 #reverse()
 #rotate(num): rotates deque by num indicated. if neg, rotates left
+
+// floor division: returns int, not float or decimal (what is a float)
