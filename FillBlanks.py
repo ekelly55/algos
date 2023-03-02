@@ -20,3 +20,19 @@ array1 = [None, 1 ,None,2,3,None,None,5,None]
 FillBlanks(array1)
 
 #solution doesn't really meet criteria. if the first element is None, there is no most recent. I would ask the question in real life. 
+def odd_name(names: list) -> str:
+
+    print(f'{}{}')
+    print(f'{}{}')
+    print(f'{}{}')
+    print(f'{}{}')
+
+#initialize counter object
+    counter = dict.fromkeys(list, 0)
+
+    print(f'counter is{counter}')
+
+
+names = ["scott", "andrew", "andrew"]
+
+odd_name(names)

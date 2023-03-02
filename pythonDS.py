@@ -230,32 +230,166 @@ d = Deque()
 
 
 
-d.addFront(1)
-d.addFront(2)
-d.addFront(3)
-d.addRear(4)
-d.addRear(5)
+# d.addFront(1)
+# d.addFront(2)
+# d.addFront(3)
+# d.addRear(4)
+# d.addRear(5)
 
-d.display()
+# d.display()
 
-d.removeFront()
-d.removeFront()
-d.removeFront()
+# d.removeFront()
+# d.removeFront()
+# d.removeFront()
 
-d.display()
+# d.display()
 
-d.addFront(3)
-d.addFront(2)
-d.addFront(1)
-d.display()
+# d.addFront(3)
+# d.addFront(2)
+# d.addFront(1)
+# d.display()
 
-d.removeRear()
+# d.removeRear()
 
-d.display()
+# d.display()
 
-print(d.size())
+# print(d.size())
 
-print(d.peekFront())
-print(d.peekRear())
-print(d.is_empty())
+# print(d.peekFront())
+# print(d.peekRear())
+# print(d.is_empty())
 
+tuple = (1, 65, "three", 2, 6)
+list = [1, 65, "three", 2, 6]
+
+string = 'there is a set'
+
+x = set(list)
+
+x2 = set(tuple)
+#will not go in in any particular order b/c set unordered
+
+y  = set(string.split())
+#won't include duplicates, or go in in any order
+
+z = {'dont', 'go', 'there'}
+
+
+b = ()
+
+c = {'a':1, 'b':2}
+
+a = set(c)
+
+
+
+
+# print(z.union(string))
+
+# class constructor
+
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+eamonn = Person('eamonn')
+
+# print(eamonn.name)
+
+dictionnary = dict.fromkeys(c, c.values())
+
+# print(dictionnary)
+
+values = ["a", "b", "c"]
+def count(values):
+    for count, value in enumerate(values, start=1):
+        print(count, value)
+
+# count(values)
+
+from collections import deque
+
+llist = deque(list)
+
+llist.appendleft(0)
+
+llist.remove(65)
+
+# print(llist.count(0))
+
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    
+    def __repr__(self):
+        node = self.head
+        nodes = []
+        while node is not None:
+            nodes.append(node.data)
+            node = node.next
+        nodes.append("None")
+        return "->".join(nodes)
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+    def __repr__(self):
+        return self.data
+    
+llist2 = LinkedList()
+
+# print(llist2)
+
+first_node = Node('a')
+llist2.head = first_node
+
+# print(llist2)
+
+second_node = Node("b")
+third_node = Node("c")
+first_node.next = second_node
+second_node.next = third_node
+
+# print(llist2)
+
+#matrix
+
+matrix = [[1, 2, 3, 4],
+	[5, 6, 7, 8],
+	[9, 10, 11, 12]]
+
+print("Matrix =", matrix)
+
+Row = 3
+Column = 4
+
+
+def makeMatrix(row, column):
+    # Initialize matrix
+    matrix = []
+
+
+    # For user input
+    # A for loop for row entries
+    for row in range(Row):
+        a = []
+        # A for loop for column entries
+        for column in range(Column):
+            a.append(column)
+        matrix.append(a)
+
+    # For printing the matrix
+    for row in range(Row):
+        for column in range(Column):
+            print(matrix[row][column], end=" ")
+        print()
+
+makeMatrix(Row, Column)
+
+
+matrix = [[column for column in range(4)] for row in range(4)]
+
+print(matrix)

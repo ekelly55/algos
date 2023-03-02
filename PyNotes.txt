@@ -1,5 +1,7 @@
 what's the walrus operaator?
 
+walrus is an assignment expression: i.e. takes a traditional assignment (statement) and makes it an expression, which returns the assigned value. don't try to use it yet
+
 #helpful string methods: isalpha() check if any string is made up entirely of letters, UPPER OR LOWER   
 # str() turn num into string, int() and str into num
 #str[:-1] slice off last letter, keep rest of string
