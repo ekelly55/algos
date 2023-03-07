@@ -60,9 +60,8 @@ function pivotIndex(nums) {
     return -1
 }
 
-let nums = [2, 1, -1]
 
-pivotIndex(nums)
+
 
 
 //works for positives. failed w/ negatives. 

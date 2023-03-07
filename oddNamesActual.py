@@ -1,6 +1,8 @@
-import time
 
-start = time.time()
+import tracemalloc
+
+
+
 
 # import cProfile
 
@@ -47,26 +49,26 @@ def odd_name(names):
         return key
     
     
-
-
 names = ["scott", "rudiger", "scott", "scott", "rudiger", "scott", "pete", "pete", "pete",]
+
+tracemalloc.start()
+ 
+# function call
 odd_name(names)
 
+ 
+# displaying the memory
+print(tracemalloc.get_traced_memory())
+ 
+# stopping the library
+tracemalloc.stop()
 
 
 
 
 
-end = time.time()
 
 
 
-runtime = round(float((end-start)*10**3), 6)
-print('O(N) runtime is', runtime, 'ms')
-
-allRunTimes = [0.013113, 0.011921, 0.006914, 0.00596, 0.007153, 0.006914, 0.00596, 0.010014, 0.006914, 0.008821]
-
-avgTime = round(float(sum(allRunTimes)/len(allRunTimes)), 6)
-print(f'average runtime for O(N) over 10 tries is {avgTime}')
 
 #this is about 1/1000 of a ms faster, or, more importantly, about 14% faster

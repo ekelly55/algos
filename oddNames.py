@@ -1,6 +1,5 @@
-import time
+import tracemalloc
 
-start = time.time()
 
 def odd_name(names: list) -> str:
 
@@ -26,17 +25,17 @@ def odd_name(names: list) -> str:
 
 
 names = ["scott", "rudiger", "scott", "scott", "rudiger", "scott", "pete", "pete", "pete",]
+
+tracemalloc.start()
+ 
+# function call
 odd_name(names)
 
-end = time.time()
+ 
+# displaying the memory
+print(tracemalloc.get_traced_memory())
+ 
+# stopping the library
+tracemalloc.stop()
 
-runtime = round(float((end-start)*10**3), 6)
-print('O(3N) runtime is', runtime, 'ms')
-
-allRunTimes = [0.01812, 0.006914, 0.006914, 0.013113, 0.00906, 0.010967, 0.012159, 0.012159, 0.011921, 0.010014]
-
-avgTime = round(float(sum(allRunTimes)/len(allRunTimes)), 6)
-print(f'average runtime for O(3N) over 10 tries is {avgTime}')
-#runtime O(3N), where each iteration is 1 operation?
-
-#this is about 16% slower
+#this is about 16% slower than the other, but takes about 27% less memory than the other
