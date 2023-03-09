@@ -9,9 +9,9 @@
 
 //callback
 
-function isFactorOfThree(num){
+function isMultOfThree(num){
     if(num % 3 === 0){
-        console.log(`${num}  is a factor of 3. true`)
+        console.log(`${num}  is a multiple of 3. true`)
         return true
 
     }
@@ -24,24 +24,22 @@ function someRecursive(arr, func){
     
     //base case
     console.log('running')
-    i = arr.length - 1
-    if(i < 0){
+    console.log(`arr[0] is ${arr[0]}`)   
+    
+    if(arr.length === 0){
         console.log(`no match. false`)
         return false
-    }
-    if(isFactorOfThree(arr[i])){
+    } else if(isMultOfThree(arr[0])){
         console.log(`match found. true`)
         return true
+    } else {
+        return someRecursive(arr.slice(1), isMultOfThree())
     }
-    console.log(`i is ${i}`)
-    console.log(`arr[i] is ${arr[i]}`)
-
-    return someRecursive(arr.slice(0, arr.length - 1), isFactorOfThree(arr[i]))
 
   }
 
-  arr = [1, 2, 7, 4, 5, 4, 2 ,76, 13, 4]
+  arr = [2, 7, 4, 5, 4, 2, 13, 4]
 
-// console.log(arr.slice(0, arr.length - 1))
+// console.log(arr.slice(1))
 
-  someRecursive(arr, isFactorOfThree)
+  someRecursive(arr, isMultOfThree)
