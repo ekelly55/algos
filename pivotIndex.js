@@ -37,30 +37,64 @@
 // 1 <= nums.length <= 104
 // -1000 <= nums[i] <= 1000
 
-function pivotIndex(nums) {
-    let sumTotal = 0
-    let leftSum = 0
-    //first, calculate total sum
-    for (i = 0; i < nums.length; i++) {
-        sumTotal += nums[i]
-        console.log(`current sumTotal = ${sumTotal}`)
-    }
-    //now, calculate left sum at each iteration. subtract it from total. if the difference, minus nums[i] = leftsum, then return nums i
-    for (j = 0; j < nums.length; j++) {
-        console.log(`current leftSum = ${leftSum}`)
-        if (leftSum === sumTotal - leftSum - nums[j]) {
-            console.log(`pivotIndex = ${j}`)
-            return j
-        }
-        leftSum += nums[j]
-        console.log(`new leftSum = ${leftSum}`)
-    }
+//try two pointers
 
-    console.log("there is no pivot index")
+
+
+function pivotIndex(nums) {
+   
+
+    if(nums.length === 1){
+        console.log(0)
+        return 0
+    }
+    //first calculate right sum, starting at nums[1]
+    let rightSum = 0
+    console.log(`right sum is ${rightSum}`)
+
+    for(i = 1; i < nums.length; i++){
+        // console.log(`num is ${num}`)
+        rightSum += nums[i]
+        console.log(`right sum is ${rightSum}`)
+    }
+    
+    if(rightSum === 0){
+        console.log(0)
+        return 0
+    }
+    
+    //now increment from left, subtracting each num from total sum til they're equal
+    //declare left pointer
+    let pivot = 0
+    //and left sum
+    let leftSum = 0
+    
+    while(pivot<nums.length){
+        console.log(`left sum is ${leftSum}`)
+        if(leftSum === rightSum){
+            console.log(`pivot found. pivot =  ${pivot}`)
+            return pivot  
+        } else {
+            console.log(`pivot not found. increment leftSum, decrement right sum and pivot`)
+            leftSum += nums[pivot]
+            rightSum -= nums[pivot + 1]
+            pivot++
+            console.log(`leftSum = ${leftSum}, rightSum = ${rightSum}, new pivot = ${pivot}`)
+            
+        }
+    }
+    //if gets through while loop without return, no pivotindex
+    console.log("no pivotIndex")
     return -1
+        
+
+    
+
 }
 
+nums = [-1,-1,0,1,1,0]
 
+pivotIndex(nums)
 
 
 

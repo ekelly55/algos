@@ -44,30 +44,22 @@ var isSubsequence = function(s, t) {
     }
     return (tracker === s)
 
-
-
-    // let tracker = ""
-    // for(i=0; i<s.length; i++){
-    //     for(j=0; j<t.length; j++){
-    //         if(s[i] === t[j]){
-    //             console.log(t[j])
-    //             tracker = tracker+ t[j]
-    //             console.log(tracker)
-    //         }
-    //     }
-    // }
-    // if(tracker === s){
-
-    //     return true
-    // } else {
-    //     return false
-    // }
 };
 
 let s = "abc"
 let t = "ahbgdc"
 
-//console.log(isSubsequence(s, t))
+console.log(isSubsequence(s, t))
+
+
+
+
+
+
+
+
+
+
 
 
 //two string inputs. first must shorter than or equal to 2nd. if equal, true. if longer, false. if neither, proceed
@@ -152,9 +144,10 @@ function isSubSequence2(str1, str2){
     console.log(`no match ${false}`)
     return false
 }
-isSubSequence2("!#", "#!$%")
+// isSubSequence2("!#", "#!$%")
 
 //pattern ace, abcde is not working. 
 //compare 1 and 1. match = 1
 //move both left pointers forward
 //compare 3 and 2. no match `
+

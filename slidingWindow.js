@@ -193,4 +193,4 @@ function findLongestSS(str){
     return maxCount
 }
 
-findLongestSS(" asdreghy ")
+findLongestSS("hello there!")

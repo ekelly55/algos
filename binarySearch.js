@@ -32,4 +32,7 @@ const states = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI'
 
 const states2 = ['MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY']
 
-console.log(binSearch(states2, 'SP'))
+const nums = [-1,0,3,5,9,12]
+const target = 9
+
+console.log(binSearch(nums, target))

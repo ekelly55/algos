@@ -10,10 +10,12 @@ function bubbleSort(arr){
     let count = 0 
     
     for(i = arr.length - 1; i >= 0; i--){
+        
         //this is going to give us a way out of the full iteration if the array is nearly already sorted.
         let noSwaps = true
         console.log(`sorting ${i} elements ${(arr.length -1) - i} elements sorted`)
         for(j = 0; j <= i; j++){
+            //but if j = i there's no j + 1 on first inner loop
             count++
             console.log(`count is ${count}`)
             if(arr[j]>arr[j+1]){
@@ -78,6 +80,7 @@ function merge(arr1, arr2){
     while(i < arr1.length){
         output.push(arr1[i])
         i++
+        //couldn't we just use slice to push the remainder of the array at once? would it be basically the same since slice has to iterate anyway?
     }
     while(j < arr2.length){
         output.push(arr2[j])
@@ -107,10 +110,10 @@ function mergeSort(arr){
     return merge(left, right)
 }
 
-// console.log(mergeSort(smallArr))
 
 smallArr = [3, 5, 2, 6, 1, 8]
 
+console.log(mergeSort(smallArr))
 //big O is nlogn (logn decompositions, n merges)
 
 //quicksort
@@ -177,6 +180,6 @@ function quickSort(arr, start = 0, end = arr.length -1){
 }
 arr = [7, 6, 12, 3, 9, 0, 3, 6, 8, 4]
 
-quickSort(arr)
+// quickSort(arr)
 
 //close, but won't work w/ negative or zero. follow example in lesson. has to do w/ how we're defining and using start and end i think
