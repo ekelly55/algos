@@ -13,9 +13,10 @@ function bubbleSort(arr){
         
         //this is going to give us a way out of the full iteration if the array is nearly already sorted.
         let noSwaps = true
-        console.log(`sorting ${i} elements ${(arr.length -1) - i} elements sorted`)
+        console.log(`sorting ${i+1} elements ${(arr.length -1) - i} elements sorted. i = ${i}`) 
         for(j = 0; j <= i; j++){
             //but if j = i there's no j + 1 on first inner loop
+            console.log("j=", j)
             count++
             console.log(`count is ${count}`)
             if(arr[j]>arr[j+1]){
@@ -39,13 +40,9 @@ function bubbleSort(arr){
     return arr
 }
 
-arr = [
-    1,         2,
-    3,       3,   3,
-    5,    1,   7,  75,
-   75,     200, 204,
-  254, 2948432
-]
+// let arr = [
+//     1, 2, 3, 3, 3, 5, 1, 7, 75, 75, 200, 204, 254, 2948432
+// ]
 
 // bubbleSort(arr) 
 
@@ -55,7 +52,62 @@ arr = [
 
 //intermediate sorting these can improve from On2 to Onlogn
 
+//selection
 
+function selectionSort(arr){
+    const swap = (arr, index1, index2) =>
+        ([arr[index1], arr[index2]] = [arr[index2], arr[index1]])
+    for(let i = 0; i<arr.length; i++){
+        let lowest = i
+        for(let j = i+1; j<arr.length; j++){
+            if(arr[lowest] > arr[j]){
+                lowest = j
+            }
+        }
+        if (i != lowest) swap(arr, i, lowest)
+    }
+    return arr
+}
+
+// selectionSort([0, 2, 34, 22, 10, 19, 17])
+
+//insertion
+
+function insertionSort(arr){
+    console.log("arr=", arr)
+    for(let i = 1; i<arr.length; i++){
+        let currentElement = arr[i]
+
+        console.log("i=", i)
+        console.log("currentElement= arr[i] = ", currentElement)
+        let j = i-1
+
+        while(j>=0 && arr[j] > currentElement){
+            
+            console.log("j=", j)
+            console.log("arr[j]=", arr[j])
+            console.log("arr[j]> currentElement, proceeding with inner loop")
+            console.log("arr[j + 1]=", arr[j+1])
+            console.log("shifting arr[j + 1]= to arr[j] because arr[j] greater.")
+            arr[j+1] = arr[j]
+            console.log("new arr[j+1]=", arr[j+1])
+            console.log("current arr = ", arr)
+            j--
+            
+        }
+        console.log("j =", j, "arr[j] doesn't exist OR arr[j] is not greater than currentElement. proceeding with outer loop")
+        console.log("j+1=", j+1,"arr[j+1] =", arr[j+1], "changing arr[j + 1]= to currentElement.")
+        arr[j+1] = currentElement
+        console.log("new arr[j + 1]=", arr[j+1])
+        console.log("current arr = ", arr)
+
+    }
+    
+    console.log("final arr = ", arr)
+    return arr
+}
+
+// insertionSort([2,1,9,76,4])
 //merge sort
 
 //split it all into 0 or 1 element arrays (b/c inherently sorted) then merge into longer and longer arrays til you have a commplete one. a merge sort is two parts: sort, then merge.  so first, how to merge sorted arrays
@@ -113,8 +165,10 @@ function mergeSort(arr){
 
 smallArr = [3, 5, 2, 6, 1, 8]
 
-console.log(mergeSort(smallArr))
+// console.log(mergeSort(smallArr))
 //big O is nlogn (logn decompositions, n merges)
+
+//quick sort and merge sort both work by first drilling down to 1 element arrays on the left (or whatever side you choose first), then on the right (but each time it runs on the right, it needs to drill  down on the left to one element arrays as well)
 
 //quicksort
 
@@ -122,50 +176,87 @@ console.log(mergeSort(smallArr))
 
 //similar to merge, in nthat it exploits arrays of 0 or 1 always being sorted by default
 //it works by selectinng  a pivot poinnt and findns the index where the pivot should end upo in sorted array. 
+
+//pivot  point can be any index: just move numbers less than to left and greater than to right: the left and right doesn't need to be sorted. you'll repeat the process on each side recursively. choose a consistent pivot point to use, like arr[0]
 //swap elements so that all the elems < pivot are right before it, then swap pivot w/ the last of those values. then repeat on left as necessary til sorted, then move on to the right and repeat
 
-//pivot helper (aka partition) this does the arranging on eithe rside of pivot. it assigns a pivot and arranges. IN PLACE no new array, returns index of pivot. 
+//pivot helper (aka partition) this does the arranging on eithe rside of pivot. it assigns a pivot and arranges. IN PLACE no new array, returns index of pivot. pivot helper can work in a variety of ways, it just has to return the correct index for the pivot point el
 
-//runtime can vary depending on where you pick pivot. pivot ideally should be median val, but not easy. for sim0plicity we'll use first el and place it in pivot index.
+//runtime can vary depending on where you pick pivot. pivot ideally should be median val, but not easy. for sim0plicity we'll use first el and place it in pivot index. but if the data isn't ordered, which it's not, then we can't know the median, so just go with first el. (there are some runtime consequences to this)
 
-//accept three args: arr, start index, end. grap pivot from start, place it, store current pivot index in a var. once done, swap pivot index val w/ element at pivot index var (it's a count of how many elements are less than)
+//accept three args: arr, start index, end. grab pivot from start, place it, store current pivot index in a var. once done, swap pivot index val w/ element at pivot index var (it's a count of how many elements are less than) 
 
-//the pivot index value is what we're comparing everything to (in this case, the first El). the pivot index variable is the count of the number of els less than the value, but will also conveniently be the right index where that value goes.
+//the pivot index value is what we're comparing everything to (in this case, the first El). the pivot index variable is the count of the number of els less than the value, but will also conveniently be the correct index where that value goes.
+
+//clarifiication: the pivot value and the pivot index are not the same. the pivot index starts as the index of the pivot value, but increments as we count elements less than the pivot value, then we swap the pivot with...the currrent element at the pivot index?
+
+//so you swap as you count elements less than the pivot, but you don't swap the pivot point til the end of the loop?
 
 //pivot helper function
 
-function pivotHelper(arr, start = 0, end = arr.length - 1){
+//my attempt: 
+
+// function pivotHelperAttempt(arr){
+//     let pivotPoint = arr[0]
+//     let pivotIndex = 0
+//     //use separate variables for clarity
+//     let count = 0
+//     console.log(arr)
+//     for(i = pivotIndex+1; i<arr.length; i++){
+//         console.log("pivotPoint is", pivotPoint)
+//         console.log("i is", i)
+//         console.log("arr[i] is", arr[i])
+//         if(arr[i] < pivotPoint){
+//             //if val at i is less than val of pivotpoint, swap val at i with val to right of pivot point
+//             [arr[i -1], arr[i]] = [arr[i], arr[i - 1]]
+//             count++
+//             console.log("swapped values and incremented count. count =", count)
+//             console.log(arr)
+//         }
+//     }
+//     //after full loop, place pivotpoint at correct index
+//     pivotIndex = count
+//     [pivotPoint, arr[pivotIndex]] = [arr[pivotIndex], pivotPoint]
+//     console.log("placed pivotPoint at proper index")
+//     console.log(arr)
+
+// }
+
+// pivotHelperAttempt([28, 41, 4, 11, 16, 1, 40, 14, 36, 37, 42, 18])
+//can write paraameters like that so that not only do they need to be supplied, but they will only accept those values. not necessary though. given function:
+function pivotHelper(arr, start = 0, end = arr.length + 1){
     console.log('new pivotHelper call')
-    let pivot =  start
-    let pivotIndex = 0
+    let pivot =  arr[start]
+    //confused. i thought the pivot was a value
+    let comparisonIndex = start
+    console.log("the pivot value is", pivot, "comparisonIndex is", comparisonIndex)
     
-    for(i = pivot + 1; i <=end; i ++){
+    for(i = start+1; i < arr.length; i ++){
         //but this will be a problem when recursively calling...when you're sorting the right side, we don't want to use i = 1
-        if(arr[pivot] > arr[i]){
-            //we found one, increment pivotIndex (for now, it serves as a count of vals < arr[start])
-            pivotIndex++
-            //now because we know there is at least {pivotIndex} number of els less than arr[start], we can swap out the el at that pivotIndex
-            [arr[pivotIndex], arr[i]] = [arr[i], arr[pivotIndex]]
-            //now that arr[end] is a diff val, it will run again
-            console.log("the pivotIndex is now:")
-            console.log(pivotIndex)
+        console.log("i =", i, "arr[i] =", arr[i], "comparisonIndex is", comparisonIndex, "arr[comparisonIndex] = ", arr[comparisonIndex])
+        if(pivot > arr[i]){
+            comparisonIndex++;
+            console.log("pivot", pivot, "is greater than arr[i]", arr[i], "incremented comparisonIndex. comparisonIndex is now", comparisonIndex, "swapping arr[comparisonIndex]", arr[comparisonIndex]," and arr[i]", arr[i])
+            let temp = arr[comparisonIndex]
+            arr[comparisonIndex] = arr[i]
+            arr[i] = temp
             console.log("the array is now:")
             console.log(arr)
         }
     }
     //now swap starting el w/ pivot index el ( for some reason, can't use the es15 swap syntax here, so use helper variable)
-    let temp = arr[pivotIndex]
-    arr[pivotIndex] = arr[pivot]
-    arr[pivot] = temp
-    console.log("the array is now:")
-    console.log(arr)
-    console.log(pivotIndex)
-    return pivotIndex 
+    // let temp = arr[pivotIndex]
+    // arr[pivotIndex] = arr[pivot]
+    // arr[pivot] = temp
+    // console.log("the array is now:")
+    // console.log(arr)
+    // console.log(pivotIndex)
+    // return pivotIndex 
     
 }
+let arr = [4, 8, 2, 1, 5, 7, 6, 3]
 
-
-// pivotHelper(arr)
+pivotHelper(arr)
 
 //now we can recursively use this in quicksort
 
