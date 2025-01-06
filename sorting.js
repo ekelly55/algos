@@ -262,9 +262,10 @@ function pivotHelper(arr, start = 0, end = arr.length + 1){
 //now we can recursively use this in quicksort
 
 function quickSort(arr, left = 0, right = arr.length -1){
-    let arrCopy = arr
+    let subarray = arr.slice(left, right+2)
     console.log("***********")
     console.log("new quickSort call. arr is", arr)
+    console.log("new quickSort call. subarr is", subarray)
     console.log("left is", left)
     console.log("right is", right)
 //base case. want it to run until each subarray is 1 element, in which case pivotIndex will be 1. when both left and right pivotIndexes equal 1, we've reached that state. as long as left < right, it's still running. as soon as they're equal, it will stop
@@ -275,13 +276,13 @@ function quickSort(arr, left = 0, right = arr.length -1){
     //here we're passing in left as the start value and right as the end value for call to pivotHelper
         let pivotIndex = pivotHelper(arr, left, right)
     //call quicksort on left side. start index stays the same (left), but end index changes to pivotIndex (returned previously) - 1
-        console.log("calling quicksort on left")
+        console.log("current pivotIndex is", pivotIndex, "calling quicksort on left subarray", arr.slice(0, pivotIndex+1))
         quickSort(arr, left, pivotIndex-1)
         //now the same on the right, but we're going to keep the end at right and move the left
-        console.log("calling quicksort on right")
+        console.log("current pivotIndex is", pivotIndex, "calling quicksort on right subarray", arr.slice(pivotIndex, right))
         quickSort(arr, pivotIndex+1, right)
     }
-    console.log("resolving call on", arrCopy, "array is now", arr)
+    console.log("resolving call on", subarray, "array is now", arr,)
     return arr
 }
 arr = [4, 6, 9, 1, 2, 5]
