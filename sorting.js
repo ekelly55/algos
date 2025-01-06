@@ -228,49 +228,64 @@ function pivotHelper(arr, start = 0, end = arr.length + 1){
     console.log('new pivotHelper call')
     let pivot =  arr[start]
     //confused. i thought the pivot was a value
-    let comparisonIndex = start
-    console.log("the pivot value is", pivot, "comparisonIndex is", comparisonIndex)
+    let swapIdx = start
+    console.log("the pivot value is", pivot, "swapIdx is", swapIdx)
     
     for(i = start+1; i < arr.length; i ++){
         //but this will be a problem when recursively calling...when you're sorting the right side, we don't want to use i = 1
-        console.log("i =", i, "arr[i] =", arr[i], "comparisonIndex is", comparisonIndex, "arr[comparisonIndex] = ", arr[comparisonIndex])
+        console.log("i =", i, "arr[i] =", arr[i], "swapIdx is", swapIdx, "arr[swapIdx] = ", arr[swapIdx])
         if(pivot > arr[i]){
-            comparisonIndex++;
-            console.log("pivot", pivot, "is greater than arr[i]", arr[i], "incremented comparisonIndex. comparisonIndex is now", comparisonIndex, "swapping arr[comparisonIndex]", arr[comparisonIndex]," and arr[i]", arr[i])
-            let temp = arr[comparisonIndex]
-            arr[comparisonIndex] = arr[i]
+            swapIdx++;
+            console.log("pivot", pivot, "is greater than arr[i]", arr[i], "incremented swapIdx. swapIdx is now", swapIdx, "swapping arr[swapIdx]", arr[swapIdx]," and arr[i]", arr[i])
+            let temp = arr[swapIdx]
+            arr[swapIdx] = arr[i]
             arr[i] = temp
             console.log("the array is now:")
             console.log(arr)
         }
     }
-    //now swap starting el w/ pivot index el ( for some reason, can't use the es15 swap syntax here, so use helper variable)
-    // let temp = arr[pivotIndex]
-    // arr[pivotIndex] = arr[pivot]
-    // arr[pivot] = temp
-    // console.log("the array is now:")
-    // console.log(arr)
-    // console.log(pivotIndex)
-    // return pivotIndex 
+    //now swap starting el w/ comparisonIncdex el ( for some reason, can't use the es15 swap syntax here, so use helper variable)
+    console.log("final swap. swapping arr[start] value:", arr[start], "and arr[swapIdx] value", arr[swapIdx])
+    let temp = arr[swapIdx]
+    arr[swapIdx] = arr[start]
+    arr[start] = temp
+    console.log("the array is now:")
+    console.log(arr)
+    console.log("swapIdx is", swapIdx)
+    return swapIdx 
     
 }
-let arr = [4, 8, 2, 1, 5, 7, 6, 3]
+// let arr = [4, 8, 2, 1, 5, 7, 6, 3]
 
-pivotHelper(arr)
+// pivotHelper(arr)
 
 //now we can recursively use this in quicksort
 
-function quickSort(arr, start = 0, end = arr.length -1){
-    //here is where we will need those start and end values. becaause we're working with an existing array. so we need to define what parts of it wwe're working with on each recursive call
-    pivotHelper(arr, start, end)
-    pivotHelper(arr, start, (pivotHelper(arr, start, end)-1))
-    pivotHelper(arr, (pivotHelper(arr, start, end)+1), end) 
+function quickSort(arr, left = 0, right = arr.length -1){
+    let arrCopy = arr
+    console.log("***********")
+    console.log("new quickSort call. arr is", arr)
+    console.log("left is", left)
+    console.log("right is", right)
+//base case. want it to run until each subarray is 1 element, in which case pivotIndex will be 1. when both left and right pivotIndexes equal 1, we've reached that state. as long as left < right, it's still running. as soon as they're equal, it will stop
+    if(left < right){
+
     
-    console.log(arr)
+    //here is where we will need those start and end values. becaause we're working with an existing array. so we need to define what parts of it wwe're working with on each recursive call
+    //here we're passing in left as the start value and right as the end value for call to pivotHelper
+        let pivotIndex = pivotHelper(arr, left, right)
+    //call quicksort on left side. start index stays the same (left), but end index changes to pivotIndex (returned previously) - 1
+        console.log("calling quicksort on left")
+        quickSort(arr, left, pivotIndex-1)
+        //now the same on the right, but we're going to keep the end at right and move the left
+        console.log("calling quicksort on right")
+        quickSort(arr, pivotIndex+1, right)
+    }
+    console.log("resolving call on", arrCopy, "array is now", arr)
     return arr
 }
-arr = [7, 6, 12, 3, 9, 0, 3, 6, 8, 4]
+arr = [4, 6, 9, 1, 2, 5]
 
-// quickSort(arr)
+quickSort(arr)
 
 //close, but won't work w/ negative or zero. follow example in lesson. has to do w/ how we're defining and using start and end i think
