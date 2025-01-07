@@ -225,10 +225,10 @@ smallArr = [3, 5, 2, 6, 1, 8]
 // pivotHelperAttempt([28, 41, 4, 11, 16, 1, 40, 14, 36, 37, 42, 18])
 //can write paraameters like that so that not only do they need to be supplied, but they will only accept those values. not necessary though. given function:
 function pivotHelper(arr, start = 0, end = arr.length + 1){
-    console.log('new pivotHelper call')
     let pivot =  arr[start]
     //confused. i thought the pivot was a value
     let swapIdx = start
+    console.log('new pivotHelper call, arr is', arr,'start is', start, 'end is', end)
     console.log("the pivot value is", pivot, "swapIdx is", swapIdx)
     
     for(i = start+1; i < arr.length; i ++){
@@ -268,6 +268,7 @@ function quickSort(arr, left = 0, right = arr.length -1){
     console.log("new quickSort call. subarr is", subarray)
     console.log("left is", left)
     console.log("right is", right)
+   
 //base case. want it to run until each subarray is 1 element, in which case pivotIndex will be 1. when both left and right pivotIndexes equal 1, we've reached that state. as long as left < right, it's still running. as soon as they're equal, it will stop
     if(left < right){
 
@@ -275,18 +276,71 @@ function quickSort(arr, left = 0, right = arr.length -1){
     //here is where we will need those start and end values. becaause we're working with an existing array. so we need to define what parts of it wwe're working with on each recursive call
     //here we're passing in left as the start value and right as the end value for call to pivotHelper
         let pivotIndex = pivotHelper(arr, left, right)
+        console.log("left < right. current pivotIndex is", pivotIndex)
     //call quicksort on left side. start index stays the same (left), but end index changes to pivotIndex (returned previously) - 1
         console.log("current pivotIndex is", pivotIndex, "calling quicksort on left subarray", arr.slice(0, pivotIndex+1))
         quickSort(arr, left, pivotIndex-1)
         //now the same on the right, but we're going to keep the end at right and move the left
-        console.log("current pivotIndex is", pivotIndex, "calling quicksort on right subarray", arr.slice(pivotIndex, right))
+        console.log("current pivotIndex is", pivotIndex, "calling quicksort on right subarray")
         quickSort(arr, pivotIndex+1, right)
     }
-    console.log("resolving call on", subarray, "array is now", arr,)
+    console.log("left is >= right. resolving call on", subarray, "array is now", arr,)
     return arr
 }
 arr = [4, 6, 9, 1, 2, 5]
 
-quickSort(arr)
+// quickSort(arr)
 
-//close, but won't work w/ negative or zero. follow example in lesson. has to do w/ how we're defining and using start and end i think
+
+//radix sort. it's an integer sort. doesn't compare. exploits fact that info about size of number is encoded in number of digits. uses binary numbers but what is that?
+
+//groups numbers by digit in ones place, then form back into list keeping them in the order of the buckets. i.e. [4, 102, 98, 9] gets sorted to [102, 4, 98, 9]
+//then do the same but grouped by tens place, so now it's [102, 4, 9, 98]
+//then with hundreds, so we get [4, 9, 98, 102]
+
+//helper fuction: getDigit(num, place) where place is expressed as a string index
+
+function getDigit(num, place){
+    let numString = num.toString()
+    console.log(numString)
+    let digitString = numString[numString.length-1 - place]
+    return parseInt(digitString)
+}
+
+//or
+function getDig(num, place){
+    return Math.floor(Math.abs(num)/Math.pow(10, place)) % 10
+    //returns the remainder but why are we multiplying by 10? becaus that'll give us the remainder and tell us what the digit is in the given place?
+}
+
+//eg if we want to find out the digit in the 100s place of 7323. we do getDig(num, place) where place is NOT an index but an exponent of 10. getDig(7323, 2) = 7323/100 = 73, now divide by ten and return remainder, which is 3, which is the digit in the tens place. better because no risk of NaN return?
+
+
+// console.log(getDigit(7342, 4))
+
+//how many digits function: we need to know the largest order of numbers, which determines how many loops
+
+function digitCount(num){
+    let numString = num.toString()
+    return numString.length
+
+    //or
+
+    if(num === 0) return 1
+    // return Math.floor(Math.log10(Math.abs(num))) + 1
+
+    //log10 asks what power of 10 does the number equal.
+    //i.e. digitCount(423). Math.log10(423) = 2.xxx. take the floor to get 2, 10^2 gives us 100, the number of digits of which is 2+1. returns 3 as the number of digits
+
+}
+
+console.log(digitCount(1230))
+
+function maxDigits(arr){
+    let maxDigits = 0;
+    for(i=0; i<arr.length; i++){
+        maxDigits = Math.max(maxDigits, digitCount(arr[i]));
+    }
+    return maxDigits
+    
+}
