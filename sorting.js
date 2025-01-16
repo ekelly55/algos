@@ -302,16 +302,20 @@ arr = [4, 6, 9, 1, 2, 5]
 
 function getDigit(num, place){
     let numString = num.toString()
-    console.log(numString)
+    // console.log(numString)
     let digitString = numString[numString.length-1 - place]
-    return parseInt(digitString)
+    let digitNum = parseInt(digitString)
+    if(digitNum != undefined && digitNum != NaN) return digitNum
+    //doesn't work because still returns undefined or NaN if the place is grater than the length of the num
 }
 
 //or
 function getDig(num, place){
     return Math.floor(Math.abs(num)/Math.pow(10, place)) % 10
     //returns the remainder but why are we multiplying by 10? becaus that'll give us the remainder and tell us what the digit is in the given place?
+    //will return 0 for the digit when checking place values greater than the number, but still works in teh function.
 }
+// console.log(getDig(492, 3))
 
 //eg if we want to find out the digit in the 100s place of 7323. we do getDig(num, place) where place is NOT an index but an exponent of 10. getDig(7323, 2) = 7323/100 = 73, now divide by ten and return remainder, which is 3, which is the digit in the tens place. better because no risk of NaN return?
 
@@ -334,9 +338,9 @@ function digitCount(num){
 
 }
 
-console.log(digitCount(1230))
+// console.log(digitCount(1230))
 
-function maxDigits(arr){
+function mostDigits(arr){
     let maxDigits = 0;
     for(i=0; i<arr.length; i++){
         maxDigits = Math.max(maxDigits, digitCount(arr[i]));
@@ -344,3 +348,35 @@ function maxDigits(arr){
     return maxDigits
     
 }
+
+// console.log(mostDigits([124, 2353, 3, 45, 940]))
+
+function radixSort(arr){
+    //first find out how many iterations we need by finding the length of the longest number in the array
+    let maxDigitCount = mostDigits(arr)
+    console.log("number of iterations =", maxDigitCount)
+    //next, make ten "buckets" for each iteration
+    for(k = 0; k<maxDigitCount; k++){
+        console.log("k=", k, "iterating over the", (10**k),"'s place")
+        let digitBuckets = Array.from({length: 10}, () => [])
+        console.log("digitBuckets = ", digitBuckets)
+        //after making the buckets, iterate through the array, focusing on one place value at a time, and put each element into its corresponding bucket
+        for(i=0; i<arr.length; i++){
+            console.log("iterating through arr. i=", i,"arr[i]=",arr[i], "checking digit of numstring at index k")
+            let digit = getDig(arr[i], k);
+            console.log("digit=", digit)
+            console.log("digitBuckets[digit]=", digitBuckets[digit])
+
+            digitBuckets[digit].push(arr[i])
+            console.log("digitBuckets now = ", digitBuckets)
+        }
+        arr = [].concat(...digitBuckets);
+        console.log("new array =", arr)
+    }
+    
+    // console.log(arr)
+    return arr
+}
+
+console.log(radixSort([23, 345, 5467, 12, 2345, 9852]))
+// radixSort([23, 345, 5467, 12, 2345, 9852])
