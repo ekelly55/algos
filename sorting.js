@@ -380,3 +380,7 @@ function radixSort(arr){
 
 console.log(radixSort([23, 345, 5467, 12, 2345, 9852]))
 // radixSort([23, 345, 5467, 12, 2345, 9852])
+
+
+//radixSort is O(nk) works great if k is not close to n. basically, if k < than logN, it's faster than the fastest comparison
+//BUT factoring in memory storage, it is theoretically O(nlogn) according to some sources
