@@ -24,13 +24,14 @@ class SinglyLinkedList{
         //if no head, set head and tail to that node
         //otherwise, set "next" on tail to be new node, and update new node to be the new tail
         //increment length++
-        let node = new Node(val)
+        let newNode = new Node(val)
         
-        if(this.head){
-            this.head.next = node
+        if(this.tail){
+            this.tail.next = newNode
+            this.tail = newNode
         } else {
-            this.head = node
-            this.tail = node
+            this.head = newNode
+            this.tail = newNode
         }
         this.length++
 
@@ -54,6 +55,12 @@ class SinglyLinkedList{
 // first.next.next.next = new Node("are")
 // first.next.next.next.next = new Node("you?")
 
+let newList = new SinglyLinkedList()
+
+newList.push('a')
+newList.push('b')
+newList.push('c')
+
 
 function printLinkedList(head){
     let current = head
@@ -64,5 +71,7 @@ function printLinkedList(head){
     }
 }
 
-console.log(printLinkedList(first))
+// console.log(printLinkedList(newList.head))
+
+console.log(newList)
 
