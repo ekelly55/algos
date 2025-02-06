@@ -48,7 +48,7 @@ class SinglyLinkedList{
     
     pop(){
         if(this.head){
-            let current = this.head
+            let current = this.tail
             let newTail = current
             while(current.next){
                 newTail = current;
