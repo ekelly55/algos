@@ -34,7 +34,7 @@ class DoublyLinkedList{
         return this
     }
     pop(){
-        if(!head) return undefined
+        if(!this.head) return undefined
         let poppedNode = this.tail
         if(this.length === 1){
             this.head = null
@@ -65,7 +65,7 @@ class DoublyLinkedList{
             // console.log("list has no nodes")
         }
         this.length--
-        return currentHead
+        return oldHead
     }
     unshift(val){
         //add a new head
@@ -91,7 +91,7 @@ class DoublyLinkedList{
         let current
         if(index+1 > this.length/2){
             let count = this.length
-            console.log("starting from the tail")
+            // console.log("starting from the tail")
             //in this case, it's closer to the tail
             current = this.tail
             while(count > index + 1){
@@ -102,7 +102,7 @@ class DoublyLinkedList{
             }
         } else {
             let count = 0
-            console.log("starting from the head")
+            // console.log("starting from the head")
             // else it's closer to the head
             current = this.head
             while(count < index){
@@ -115,6 +115,68 @@ class DoublyLinkedList{
         // console.log("node value at index", index," is", current)
         return current
     }
+    set(index, val){
+        //get a value at a specific spot in the list. a way to get a pseudo-index, even though we the LL doens't use indexes
+        //fist figure out what end you're closest to
+        let targetNode = this.get(index)
+        // console.log("target node is", targetNode)
+        if(targetNode){
+            targetNode.val = val
+            return true
+        }
+        return false
+    }
+    traverse(){
+        let current = this.head
+        // will go as long as the next "current" exists. when it's null, it stops
+        while(current){
+            console.log(current.val)
+            current = current.next
+        }
+    }
+    insert(index, val){
+        let newNode = new Node(val)
+        if(index < 0 || index > this.length - 1) return false
+        if(index === this.length -1){
+            this.push(val)
+            return true
+        } 
+        if(index === 0){
+            this.unshift(val)
+            return true
+        }  
+        
+        let targetNode = this.get(index)
+        // console.log("target node is", targetNode)
+        if(targetNode){
+            newNode.next = targetNode.next
+            targetNode.next.prev = newNode
+            newNode.prev = targetNode
+            targetNode.next = newNode
+            this.length++
+            return true
+        }
+        return false
+    }
+    remove(index){
+        //this will return the removed node, not a boolean
+        if(index < 0 || index > this.length - 1) return undefined
+        if(index === this.length -1) return this.pop()
+        if(index === 0) return this.shift()
+        
+        
+        let prevNode = this.get(index-1)
+       
+        //set new next on the node before targetNode to the value one past the target node
+        let removedNode = prevNode.next
+        prevNode.next = removedNode.next
+        removedNode.next.previous = prevNode
+        // prevNode.next.val = null
+        removedNode.next = null
+        removedNode.prev = null
+        this.length--
+        return removedNode
+    }
 }
 
 let list = new DoublyLinkedList()
@@ -125,7 +187,16 @@ list.push("is")
 list.push("me")
 // console.log(list.shift())
 // console.log(list)
-console.log(list.get(3))
-console.log(list.get(2))
-console.log(list.get(1))
-console.log(list.get(0))
+// console.log(list.get(3))
+// console.log(list.get(2))
+// console.log(list.get(1))
+// console.log(list.get(0))
+
+console.log(list.remove(3))
+
+list.traverse()
+
+
+//big O
+//insertion or removal from end or beginning: O1
+//searching, access, insertion, removal from interior ON/2 (which still qualifies as ON by some)
