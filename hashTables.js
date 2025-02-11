@@ -93,23 +93,88 @@ class HashTable {
 
     get(key){
         let index = this._hash(key)
-        console.log(this.keyMap[index])
+        // console.log(this.keyMap[index])
         if(this.keyMap[index]){
                 
             for(let el of this.keyMap[index]){
                 //since each element is an array, and each element within that array is a subarray containing a key and value, you can check if el[0] is the key
                 if(el[0] === key){
-                    return el
+                    return el[1]
                 }
             }
         }
         return undefined
     }
+    //keys method: returns
+    keys(){
+        let keys = []
+        for(let i=0; i < this.keyMap.length; i++){
+            // console.log(el)
+            if(this.keyMap[i]){
+                // console.log(this.keyMap[i])  
+                for(let j = 0; j < this.keyMap[i].length; j++){
+                    // method for returning all
+                    // keys.push(this.keyMap[i][j][1])
+                    // optional method for returning only unique keys. we don't have a method to handle setting duplicate keys
+                    if(!keys.includes(this.keyMap[i][j][0])){
+                        keys.push(this.keyMap[i][j][0])
+                        
+                    }
+                }   
+
+            }
+        }
+        return keys
+    }
+    //values method: returns 
+    values(){
+        let values = []
+        for(let i=0; i < this.keyMap.length; i++){
+            // console.log(el)
+            if(this.keyMap[i]){
+                // console.log(this.keyMap[i])  
+                for(let j = 0; j < this.keyMap[i].length; j++){
+                    // method for returning all
+                    // values.push(this.keyMap[i][j][1])
+                    // optional method for returning only unique values
+                    if(!values.includes(this.keyMap[i][j][1])){
+                        values.push(this.keyMap[i][j][1])
+                        
+                    }
+                }   
+
+            }
+        }
+        return values
+    }
 }
 
 let ht = new HashTable()
-ht.set("hello world", "goodbye!!")
-console.log(ht.get("hello world"))
+ht.set("milo", "alfred-kelly")
+ht.set("kaye", "alfred-kelly")
+ht.set("elana", "alfred")
+ht.set("abby", "alfred")
+ht.set("sue", "alfred")
+ht.set("howie", "alfred")
+ht.set("eamonn", "kelly")
+ht.set("bob", "kelly")
+ht.set("andrew", "kelly")
+ht.set("rolo", "kelly")
+
+// console.log(ht.get("eamonn"))
+// console.log(ht.get("milo"))
+// console.log(ht.get("sue"))
+// console.log(ht.get("elana"))
+// console.log(ht.get("rolo"))
+// console.log(ht.get("kaye"))
+
+console.log(ht.keys())
 
 
+//big O of hash tables (average case)(with simplifications and removal of coefficients)
 
+//insert: O1
+//deletion O1
+//access O1
+
+//this is talking about real ones, not ours above, where get is worst case ON

@@ -54,6 +54,8 @@ map is an instance of object, but not vice versa
 
 can create new objects by literal or constructor (don't use constructor normally)
 map can only be created by constructor: receives an iterable, like an array, with key value pairs for each element
+
+map is better performance wise for larger sets of data. has more built-in methods
 */
 
 const map = new Map([[1,2],[3,4]])
@@ -82,6 +84,10 @@ const map = new Map([[1,2],[3,4]])
 //hash tables need 3 basic methods: search, insert, remove
 
 //hash tables are great when you have millions or billions of entries: thats why we haven't used them. used for real world db and computer memory. spell checker is an implementation of a hash table
+
+//if using only string keys and don't need more robust methods, stick with object
+
+//if working with JSON, stick with object
 
 class HashTable {
     constructor() {
