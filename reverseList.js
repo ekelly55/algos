@@ -15,15 +15,9 @@
 var reverseList = function(head) {
    console.log(head)
 
-   function LinkedList(head) {
-        this.head = head
-}
-   function ListNode(val, next) {
-
-      this.val = (val===undefined ? 0 : val)
-      this.next = (next===undefined ? null : next)
-    
-    }
+   //we're given the head, so let's start by building a new one
+   
+   
     
     let output
     

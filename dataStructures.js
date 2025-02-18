@@ -178,7 +178,8 @@ class BinaryTree {
             node.right = this.removeNode(node.right, key);
             return node;
         } else {
-            //remove node w/ no children
+            //if it's not less than or greater, then we've found the key value
+            //if no children, just remove it and return it
             if(node.left === null && node.right === null){
                 node = null;
                 return node;
@@ -186,6 +187,7 @@ class BinaryTree {
             //remove node w/ one child
             if(node.left === null){
                 node = node.right;
+                //return the new node value? why not return the one you were looking for?
                 return node;
             }
             else if(node.right === null){
@@ -197,6 +199,7 @@ class BinaryTree {
         let aux = this.findMinNode(node.right);
         node.data = aux.data;
     }
+    //this finds the smallest node on the right side to replace the target value, which will preserve the sorted order of the tree. could also do find max on left
     findMinNode(node){
         //if there's no left node then it is the min
         if(node.left === null)
