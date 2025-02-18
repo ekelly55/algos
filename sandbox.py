@@ -69,16 +69,15 @@ def download_file(url):
 
         max_x = max(max(x for x, _ in y_groups[y]) for y in y_groups)
 
-        grid = []
+        grid = [[' ' for _ in range(max_x + 1)] for _ in range(max_y + 1)]
 
-        # print(y_groups[0])
-        for y_value in range(min_y, max_y + 1):
-            row = [' ']*(max_x + 1)
-            for x, char in y_groups[y_value]:
-                row[x] = char
-            grid.append(row)
+        for row in sorted_table:
+            x = int(row[0])
+            y= int(row[2])
+            char = row[1]
+            grid[max_y - y][x] = char
         
-        grid.reverse()
+        # grid.reverse()
 
         for row in grid:
             print("".join(row))
