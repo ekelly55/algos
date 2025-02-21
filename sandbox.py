@@ -23,37 +23,27 @@ def download_file(url):
     if response.status_code == 200:
         # extract doc content
         doc_content = BeautifulSoup(response.text, 'html.parser')
-        #extract teh table from the doc content
+        # extract teh table from the doc content
         table = doc_content.find_all('table')[0]
-        # print(table.prettify())
 
-        # #extract the rows from teh table
+        # extract the rows from teh table
         rows = table.find_all('tr')
-        # if rows:
-        #     # extract the headers by making an array of stripped text from the html in top row
-        #     headers = [col.text.strip() for col in rows[0].find_all('td')]
-        # else:
-        #     headers = []  
-
+        
+        # list to store table data
         table_data = []
 
         # iterate through all non-header rows
         for row in rows[1:]:
             #extract columns from each row
             columns = row.find_all('td')
-            #make an array of stripped text from cols in columns
+            #make an list of stripped text from cols in columns
             columns = [col.get_text(strip=True) for col in columns]
-            # print(columns)
             if columns:
                 # append that array to the table data array
                 table_data.append(columns)
-        # for row in table_data:
-        #     print([ord(char) for char in row[1]])
-        # print(table_data)
-        #turn each array element in table data into a dictionary mapping values to header keys
-        # table_data = [dict(zip(headers, row)) for row in table_data]
+            
+        # sort table data by y descending, x ascending to be able to print from top of 'letters' left to right
         sorted_table = sorted(table_data, key=lambda row: (-int(row[2]), int(row[0])))
-        # print(sorted_table)
 
         y_groups = defaultdict(lambda: [])
 
@@ -65,20 +55,20 @@ def download_file(url):
 
         max_y = max(y_groups.keys())
         min_y = min(y_groups.keys())
-        print(max_y)
 
+        # find max x value - extracts x vals from tuples in dict, discards char value. finds max in row, then max in table
         max_x = max(max(x for x, _ in y_groups[y]) for y in y_groups)
 
-        grid = [[' ' for _ in range(max_x + 1)] for _ in range(max_y + 1)]
+        grid = [[' ' for cell in range(max_x + 1)] for cell in range(max_y + 1)]
 
         for row in sorted_table:
             x = int(row[0])
             y= int(row[2])
             char = row[1]
+            # ensures values are filled in filled in correctly since y=0 represents the bottom of the letter in the data, but y=0 represents the top row of this grid
             grid[max_y - y][x] = char
         
-        # grid.reverse()
-
+        # finally, for each grid row, join the characters in the list and print
         for row in grid:
             print("".join(row))
 
@@ -88,6 +78,5 @@ def download_file(url):
     
 
 file_url = "https://docs.google.com/document/d/e/2PACX-1vQGUck9HIFCyezsrBSnmENk5ieJuYwpt7YHYEzeNJkIb9OSDdx-ov2nRNReKQyey-cwJOoEKUhLmN9z/pub"
-# file_url = "https://docs.google.com/document/d/e/2PACX-1vRMx5YQlZNa3ra8dYYxmv-QIQ3YJe8tbI3kqcuC7lQiZm-CSEznKfN_HYNSpoXcZIV3Y_O3YoUB1ecq/pub"
-# file_url = "https://docs.google.com/document/d/136e5OwWxKzqC4x8BgbzYwnTt8JvH-e0e3Isg1tFwmrc/edit?usp=sharing"
+
 download_file(file_url)
