@@ -7,7 +7,7 @@ var equalPairs = function(grid) {
     let rowsMap = new Map()
 
     //for each loop, lets recursively build the column at that index
-    let colsGrid = []
+    let colsMap = new Map()
 
     //what does the recursive function need to do?
     //it needs to keep track of the colIndex (which will be i), while allowing for a changing rowIndex
@@ -16,30 +16,40 @@ var equalPairs = function(grid) {
     //then go for the next rowIndex 
     //needs to take in the rowIndex, the grid, the colsgrid
 
-    let buildCol = (rowIndex, colIndex, colsGrid, grid) => {
+    let buildCol = (rowIndex, colIndex, colsMap, grid) => {
+        
         //what's the end case?
         if(rowIndex === grid.length){
             console.log(colsGrid)
-            return colsGrid
+            return colsMap
         }
-        console.log("colIndex =", colIndex, "rowIndex=", rowIndex, "target value =", grid[colIndex][rowIndex])
+
+        console.log("colIndex =", colIndex, "rowIndex=", rowIndex)
         //if it's not long enough yet, need to access the value at grid
-        colsGrid.push(grid[colIndex][rowIndex])
-        // buildCol(rowIndex + 1, colIndex, colsGrid, grid)
+        let targetVal = grid[rowIndex][colIndex]
+        console.log("targetVal=", targetVal)
+        colsGrid[colIndex].push(targetVal)
+        // console.log(colsGrid)
+        buildCol(rowIndex+1, colIndex, colsGrid, grid)
     }
 
     for(let i=0; i<grid.length; i++){
+        console.log("starting loop", i)
         //first join into a 3 dig num string
         let rowStr = grid[i].join(',')
         //same as usual syntax with an object, but using map methods
         rowsMap.set(rowStr, (rowsMap.get(rowStr) || 0) + 1)
-
+        
         //now, lets populate the colsgrid
-        buildCol(i, 0, colsGrid, grid)
+        
+        buildCol(0, i, colsGrid, grid)
+        
+        console.log("ending loop", i)
+        console.log("rowsMap = ", rowsMap)
+        console.log("colsgrid = ", colsGrid)
+
         
     }
-    console.log("rowsMap = ", rowsMap)
-    console.log("colsgrid = ", colsGrid)
     //and lets make a cols object
     // let cols = {}
     
