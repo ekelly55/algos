@@ -7,7 +7,7 @@ var equalPairs = function(grid) {
     let rowsMap = new Map()
 
     //for each loop, lets recursively build the column at that index
-    let colsMap = new Map()
+    let colsGrid = []
 
     //what does the recursive function need to do?
     //it needs to keep track of the colIndex (which will be i), while allowing for a changing rowIndex
@@ -28,28 +28,40 @@ var equalPairs = function(grid) {
         //if it's not long enough yet, need to access the value at grid
         let targetVal = grid[rowIndex][colIndex]
         console.log("targetVal=", targetVal)
+        if(!colsGrid[colIndex]){
+            colsGrid.push([])
+        }
         colsGrid[colIndex].push(targetVal)
         // console.log(colsGrid)
         buildCol(rowIndex+1, colIndex, colsGrid, grid)
     }
 
     for(let i=0; i<grid.length; i++){
-        console.log("starting loop", i)
         //first join into a 3 dig num string
         let rowStr = grid[i].join(',')
         //same as usual syntax with an object, but using map methods
         rowsMap.set(rowStr, (rowsMap.get(rowStr) || 0) + 1)
-        
-        //now, lets populate the colsgrid
+    }
+    console.log("rowsMap = ", rowsMap)
+    
+    //now, lets populate the colsgrid and count matches
+    let count = 0
+
+    for(let i=0; i<grid.length; i++){
+        console.log("starting col build loop", i)
         
         buildCol(0, i, colsGrid, grid)
-        
-        console.log("ending loop", i)
-        console.log("rowsMap = ", rowsMap)
+        console.log("ending col build", i)
         console.log("colsgrid = ", colsGrid)
+        let colStr = colsGrid[i].join(',')
+        if(rowsMap.has(colStr)){
+            count += rowsMap.get(colStr)
+        }
+    }
+    console.log(count)
+    return count
 
         
-    }
     //and lets make a cols object
     // let cols = {}
     
