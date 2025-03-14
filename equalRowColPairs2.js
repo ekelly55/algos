@@ -9,13 +9,6 @@ var equalPairs = function(grid) {
     //for each loop, lets recursively build the column at that index
     let colsGrid = []
 
-    //what does the recursive function need to do?
-    //it needs to keep track of the colIndex (which will be i), while allowing for a changing rowIndex
-    //each time, it needs to access the rowIndex[colIndex] of the grid
-    //then push that value onto the colIndex[rowIndex]
-    //then go for the next rowIndex 
-    //needs to take in the rowIndex, the grid, the colsgrid
-
     let buildCol = (rowIndex, colIndex, colsMap, grid) => {
         
         //what's the end case?
@@ -61,36 +54,10 @@ var equalPairs = function(grid) {
     console.log(count)
     return count
 
-        
-    //and lets make a cols object
-    // let cols = {}
-    
-    
-    // //and a counter for pairs
-    // let count = 0
-    
-    // for(i = 0; i<grid.length; i++){
-    //     for(j = 0; j < grid[i].length; j++){
-    //         if(!cols[j]){
-    //             cols[j] = []
-    //         } 
-    //         cols[j].push(grid[i][j])
-    //         // console.log("cols[j] =", cols[j])
-    //         let colStr = cols[j].join(',')
-    //         if(rowsMap.has(colStr)){
-    //             count += rowsMap.get(colStr)
-    //         }    
-    //     }
-    // }
-    // // console.log(cols)
-    
-    // //now lets iterate through the cols and see if they match the rows
-    
-    // // console.log(count)
-    // return count
+     
 };
 
-let grid = [[3,2,1],[1,7,6],[2,7,7]]
+let grid = [[3,1,2,2],[1,4,4,5],[2,4,2,2],[2,4,2,2]]
 //expected output 1
 
 equalPairs(grid)
