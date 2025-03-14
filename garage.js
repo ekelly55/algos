@@ -50,7 +50,7 @@ ParkingSystem.prototype.removeCar = function(car){
         totalHours = totalTime/600
         let totalCharge = "$" + this.rate*totalHours
         //add space back
-        console.log(car, "removed at", car.exitTime, "parking charge", totalCharge)
+        console.log("car of type", car.carType, "removed at", car.exitTime, "parking charge", totalCharge)
         this.spots[car.carType-1]++
         
         console.log("spots available =", this.spots)
