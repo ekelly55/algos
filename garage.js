@@ -1,66 +1,66 @@
-/**
- * @param {number} big
- * @param {number} medium
- * @param {number} small
- */
-var ParkingSystem = function(big, medium, small) {
-    //set amount of each spot
-    this.spots = [big, medium, small]
-    this.rate = 1.5
-    console.log("garage created. spaces available =", this.spots)
-};
+// /**
+//  * @param {number} big
+//  * @param {number} medium
+//  * @param {number} small
+//  */
+// var ParkingSystem = function(big, medium, small) {
+//     //set amount of each spot
+//     this.spots = [big, medium, small]
+//     this.rate = 1.5
+//     console.log("garage created. spaces available =", this.spots)
+// };
 
-/** 
- * @param {number} carType
- * @return {boolean}
- */
-//now we need a car object
+// /** 
+//  * @param {number} carType
+//  * @return {boolean}
+//  */
+// //now we need a car object
 
-Car = function(carType){
-    this.carType = carType
-    //only timestamp if space available
-    this.entryTime = 0
-    this.exitTime = 0
-}
+// Car = function(carType){
+//     this.carType = carType
+//     //only timestamp if space available
+//     this.entryTime = 0
+//     this.exitTime = 0
+// }
 
-ParkingSystem.prototype.addCar = function(carType) {
-    //first check if space for this type of car
-    if(this.spots[carType-1] === 0){
-        console.log("no space available")
-        return false
-    } 
-    //if space, create new car object and give it an entry time
-    let car = new Car(carType)
-    car.entryTime = Date.now()
-    //now decrement the spaces
-    this.spots[carType-1]--
-    console.log("carType",carType, "added at", car.entryTime)
-    console.log("spots available =", this.spots)
-    return car
+// ParkingSystem.prototype.addCar = function(carType) {
+//     //first check if space for this type of car
+//     if(this.spots[carType-1] === 0){
+//         console.log("no space available")
+//         return false
+//     } 
+//     //if space, create new car object and give it an entry time
+//     let car = new Car(carType)
+//     car.entryTime = Date.now()
+//     //now decrement the spaces
+//     this.spots[carType-1]--
+//     console.log("carType",carType, "added at", car.entryTime)
+//     console.log("spots available =", this.spots)
+//     return car
 
-};
-//remove car should take in car var name
-ParkingSystem.prototype.removeCar = function(car){
-    if(car){
+// };
+// //remove car should take in car var name
+// ParkingSystem.prototype.removeCar = function(car){
+//     if(car){
 
-        let startTime = car.entryTime
-        car.exitTime = Date.now()
-        let totalTime = car.exitTime - startTime
-        //convert to hours
-        totalHours = totalTime/600
-        let totalCharge = "$" + this.rate*totalHours
-        //add space back
-        console.log("car of type", car.carType, "removed at", car.exitTime, "parking charge", totalCharge)
-        this.spots[car.carType-1]++
+//         let startTime = car.entryTime
+//         car.exitTime = Date.now()
+//         let totalTime = car.exitTime - startTime
+//         //convert to hours
+//         totalHours = totalTime/600
+//         let totalCharge = "$" + this.rate*totalHours
+//         //add space back
+//         console.log("car of type", car.carType, "removed at", car.exitTime, "parking charge", totalCharge)
+//         this.spots[car.carType-1]++
         
-        console.log("spots available =", this.spots)
-        return totalCharge
-    } else {
-        console.log("no such car in garage")
-        return false
-    }
+//         console.log("spots available =", this.spots)
+//         return totalCharge
+//     } else {
+//         console.log("no such car in garage")
+//         return false
+//     }
 
-}
+// }
 
 /** 
  * Your ParkingSystem object will be instantiated and called as such:
@@ -70,6 +70,66 @@ ParkingSystem.prototype.removeCar = function(car){
 //system initialized w set num of big, med small spaces, then cars added, using int to specify size
 
 //check if space available. if yes, return true, if no return false
+
+class ParkingSystem {
+    constructor(big, medium, small){
+        //set amount of each type
+        this.spots = [big, medium, small]
+        this.rate = 1.5
+        console.log("garage created. spaces available =", this.spots)
+
+    }
+    addCar(carType){
+        //first check if space for this type of car
+        if(this.spots[carType-1] === 0){
+            console.log("no space available")
+            return false
+        } 
+        //if space, create new car object and give it an entry time
+        let car = new Car(carType)
+        car.entryTime = Date.now()
+        //now decrement the spaces
+        this.spots[carType-1]--
+        console.log("carType",carType, "added at", car.entryTime)
+        console.log("spots available =", this.spots)
+        return car
+    }
+
+    removeCar(car){
+        if(car){
+
+            let startTime = car.entryTime
+            car.exitTime = Date.now()
+            // console.log("setting exit time to", car.exitTime)
+            let totalTime = car.exitTime - startTime
+            //convert to hours
+            let totalHours = totalTime/600
+            let totalCharge = "$" + this.rate*totalHours
+            //add space back
+            console.log("car of type", car.carType, "removed at", car.exitTime, "parking charge", totalCharge)
+            this.spots[car.carType-1]++
+            
+            console.log("spots available =", this.spots)
+            return totalCharge
+        } else {
+            console.log("no such car in garage")
+            return false
+        }
+    }
+};
+
+
+//now we need a car object
+
+class Car {
+    constructor(carType){
+        this.carType = carType
+        //only timestamp if space available
+        this.entryTime = 0
+        this.exitTime = 0
+    }
+}
+
 
 let garage = new ParkingSystem(1, 1, 0)
 
